@@ -15,6 +15,7 @@ namespace Main
     {
         private static Game _instance;
         public static Game Instance => _instance ?? (_instance = new Game());
+        private List<IGameObserver> observers = new List<IGameObserver>();
 
         private Board _board;
         public bool FirstClickIsSafe { get; set; }
