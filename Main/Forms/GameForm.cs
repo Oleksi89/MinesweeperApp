@@ -10,28 +10,62 @@ using System.Windows.Forms;
 
 namespace Main
 {
-    public partial class GameForm : Form
+    public partial class GameForm : Form, IGameObserver
     {
-
+        private Game game;
 
 
         public GameForm()
         {
             InitializeComponent();
-
+            game.RegisterObserver(this);
+            game = Game.Instance;
+            game.Initialize();
 
         }
 
+        public void Update(string message)
+        {
+            if (message == "game won")
+            {
+
+                gameWonControl.UpdateGameWonInfo(gameTimer.TimeElapsed, game.BestBeginnerTime, game.ClicksMade);
+                gameWonControl.Visible = true;
+                gameWonControl.BringToFront();
+            }
+            if (message == "game lost")
+            {
+                MessageBox.Show("You Lost!");
+            }
+
+            if (message == "game started")
+            {
+                if (boardControl != null)
+                {
+                    this.Controls.Remove(boardControl);
+                }
+                boardControl = new BoardControl(game.Board);
+                this.Controls.Add(boardControl);
+            }
+            // playerInfoLabel.Text = $"{game.ClicksMade}";
+
+            if (message == "regenerate board" && Game.Instance.FirstClickIsSafe)
+            {
+                boardControl.UpdateBoard();
+            }
+
+        }
 
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
-
+            string playerName = playerNameTextBox.Text;
+            game.StartGame(playerName);
         }
 
         private void endGameButton_Click(object sender, EventArgs e)
         {
-          
+            game.EndGame();
         }
 
         private void loginButton_Click(object sender, EventArgs e)
