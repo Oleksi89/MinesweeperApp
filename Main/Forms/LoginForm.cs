@@ -12,12 +12,12 @@ namespace Main
 {
     public partial class LoginForm : Form
     {
+        private Game game;
 
-
-        public LoginForm()
+        public LoginForm(Game game)
         {
             InitializeComponent();
-
+            this.game = game;
         }
 
         private void loginButton_Click(object sender, EventArgs e)

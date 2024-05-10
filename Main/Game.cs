@@ -1,4 +1,5 @@
-﻿using Main.Properties;
+﻿using Main.Observers;
+using Main.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Printing;
@@ -14,7 +15,7 @@ namespace Main
     {
         private static Game _instance;
         public static Game Instance => _instance ?? (_instance = new Game());
-        private List<IGameObserver> observers = new List<IGameObserver>();
+
         private Board _board;
         public bool FirstClickIsSafe { get; set; }
         public bool ClickNumberOpensAdjacentCells { get; set; }
@@ -61,6 +62,8 @@ namespace Main
                 observer.Update(message);
             }
         }
+
+
 
         public void StartGame(string playerName)
         {

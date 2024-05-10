@@ -12,12 +12,12 @@ namespace Main
 {
     public partial class GameSettingsForm : Form
     {
+        private Game game;
 
-
-        public GameSettingsForm()
+        public GameSettingsForm(Game game)
         {
             InitializeComponent();
-
+            this.game = game;
             LoadSettings();
         }
 

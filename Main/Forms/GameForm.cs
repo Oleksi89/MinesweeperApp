@@ -13,14 +13,27 @@ namespace Main
     public partial class GameForm : Form, IGameObserver
     {
         private Game game;
-
+        private BoardControl boardControl;
+        private GameTimer gameTimer;
+        private MineCounter mineCounter;
+        private GameWonControl gameWonControl;
 
         public GameForm()
         {
             InitializeComponent();
-            game.RegisterObserver(this);
+
+
             game = Game.Instance;
             game.Initialize();
+            game.RegisterObserver(this);
+            gameTimer = new GameTimer(timerLabel);
+            game.RegisterObserver(gameTimer);
+            gameWonControl = new GameWonControl();
+            mineCounter = new MineCounter(mineCounterLabel);
+            game.RegisterObserver(mineCounter);
+            this.Controls.Add(gameWonControl);
+            gameWonControl.Dock = DockStyle.Fill;
+            gameWonControl.Visible = false;
 
         }
 
