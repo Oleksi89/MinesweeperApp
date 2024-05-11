@@ -1,4 +1,4 @@
-﻿using Main.Observers;
+﻿using Main;
 using Main.Properties;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,14 @@ namespace Main
         {
             gameSettings.Add(gameSetting);
         }
-
+        public void RemoveGameSetting<T>() where T : IGameSetting
+        {
+            var settingToRemove = gameSettings.OfType<T>().FirstOrDefault();
+            if (settingToRemove != null)
+            {
+                gameSettings.Remove(settingToRemove);
+            }
+        }
 
         public void RegisterObserver(IGameObserver observer)
         {
@@ -69,6 +76,8 @@ namespace Main
         public void StartGame(string playerName)
         {
             ClicksMade = 0;
+            ClearSettings();
+
             foreach (var gameSetting in gameSettings)
             {
                 gameSetting.Apply(this);
@@ -78,6 +87,14 @@ namespace Main
             NotifyObservers("game started");
             gameInProgress = true;
 
+        }
+
+        public void ClearSettings()
+        {
+            FirstClickIsSafe = false;
+            ClickNumberOpensAdjacentCells = false;
+            ClickOnMineStartsDefuseCountdown = false;
+            AllMinesFlaggedOpensRemainingCells = false;
         }
 
         public void GameLost()

@@ -41,7 +41,11 @@ namespace Main
                 hardRadioButton.Checked = true;
             }
 
-
+            // Встановлюємо чекбокси відповідно до налаштувань гри
+            safeStartCheckBox.Checked = game.GameSettings.Any(gs => gs is SafeStart);
+            safeZoneCheckBox.Checked = game.GameSettings.Any(gs => gs is SafeZone);
+            defuseCheckBox.Checked = game.GameSettings.Any(gs => gs is Defuse);
+            openRemainingCheckBox.Checked = game.GameSettings.Any(gs => gs is OpenRemaining);
         }
 
 
@@ -61,7 +65,38 @@ namespace Main
             {
                 difficultyLevelStrategy = new HardDifficultyLevelStrategy();
             }
+
+            if (safeStartCheckBox.Checked)
+            {
+                game.AddGameSetting(new SafeStart());
+            }
+            else
+                game.RemoveGameSetting<SafeStart>();
+
+            if (safeZoneCheckBox.Checked)
+            {
+                game.AddGameSetting(new SafeZone());
+            }
+            else
+                game.RemoveGameSetting<SafeZone>();
+
+            if (defuseCheckBox.Checked)
+            {
+                game.AddGameSetting(new Defuse());
+            }
+            else
+                game.RemoveGameSetting<Defuse>();
+
+            if (openRemainingCheckBox.Checked)
+            {
+                game.AddGameSetting(new OpenRemaining());
+            }
+            else
+                game.RemoveGameSetting<OpenRemaining>();
+
+
             game.Settings = new GameSettings(difficultyLevelStrategy);
+            game.StartGame("");
             this.Close();
         }
     }

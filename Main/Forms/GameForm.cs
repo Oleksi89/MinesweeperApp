@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Main;
 
 namespace Main
 {
@@ -18,10 +19,10 @@ namespace Main
         private MineCounter mineCounter;
         private GameWonControl gameWonControl;
 
+
         public GameForm()
         {
             InitializeComponent();
-
 
             game = Game.Instance;
             game.Initialize();
@@ -34,7 +35,6 @@ namespace Main
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
-
         }
 
         public void Update(string message)
@@ -69,7 +69,6 @@ namespace Main
 
         }
 
-
         private void startGameButton_Click(object sender, EventArgs e)
         {
             string playerName = playerNameTextBox.Text;
@@ -103,7 +102,10 @@ namespace Main
 
         private void openRemainingCellsButton_Click(object sender, EventArgs e)
         {
-
+            if (Game.Instance.AllMinesFlaggedOpensRemainingCells && Game.Instance.Board.TotalMines == Game.Instance.Board.GetCells().Cast<Cell>().Count(c => c.IsFlagged))
+            {
+                Game.Instance.Board.OpenRemainingCells();
+            }
         }
     }
 
