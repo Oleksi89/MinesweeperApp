@@ -30,6 +30,8 @@ namespace Main
             RaiseOnClick();
             if (Game.Instance.Board.IsGameWon())
                 Game.Instance.GameWon();
+            
+
             if (!IsFlagged && this is EmptyCell)
             {
                 Game.Instance.Board.OpenAdjacentEmptyCells(this);
@@ -50,7 +52,7 @@ namespace Main
                 Open();
                 // Відкриваємо всі сусідні пустi клітин
                 RaiseOnClick();
-                
+
             }
         }
 
@@ -84,16 +86,13 @@ namespace Main
                 }
                 else
                 {
+                    Game.Instance.ClicksMade++;
                     Open();
                     RaiseOnClick();
-                    if (!Game.Instance.ClickOnMineStartsDefuseCountdown == true)
-                    {
-                        // Game.Instance.EndGame();             
-                                               
-                        // TODO: Кінець гри
-                        Game.Instance.ClicksMade++;
+                     if (!Game.Instance.ClickOnMineStartsDefuseCountdown == true)                                            
                         Game.Instance.GameLost();                        
-                    }   
+                    
+                    
                 }
 
                 

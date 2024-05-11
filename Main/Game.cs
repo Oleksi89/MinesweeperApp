@@ -99,7 +99,7 @@ namespace Main
 
         public void GameLost()
         {
-            Board.OpenRemainingCells();
+            Board.OpenRemainingMines();
             EndGame();
             NotifyObservers("game lost");           
             

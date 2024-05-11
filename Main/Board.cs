@@ -115,9 +115,30 @@ namespace Main
             return Math.Abs(x1 - x2) <= 1 && Math.Abs(y1 - y2) <= 1;
         }
 
+        public bool IsGameLost()
+        {
+            int mineCounter = 0;
+            bool isLost = false;
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    if (cells[i, j] is MineCell && (cells[i, j].IsRevealed || cells[i, j].IsFlagged))
+                    {
+                        mineCounter++;
+                        if (cells[i, j].IsRevealed)
+                            isLost = true;
+                    }
+                       
+        }
+            }
+            return mineCounter == TotalMines && isLost;
+        }
+
+
         public bool IsGameWon()
         {
-            int totalCells = cells.GetLength(0) * cells.GetLength(1);
+            int totalCells = Width * Height;
             int openCells = 0;
             int mines = 0;
 
@@ -250,6 +271,23 @@ namespace Main
             return adjacentCells;
         }
 
+        public void OpenRemainingMines()
+        {
+            
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    Cell cell = cells[i, j];
+                    
+                    if (!cell.IsRevealed && (cell is MineCell || (cell.IsFlagged && cell is not MineCell)))
+                    {
+                        cell.Open();
+                    }
+                }
+            }
+        }
+
 
         public void OpenRemainingCells()
         {
@@ -260,12 +298,14 @@ namespace Main
                 {
                     Cell cell = cells[i, j];
                     // Якщо клітинка не відкрита , відкриваємо її
-                    if (!cell.IsRevealed)
+                    if (!cell.IsRevealed && !(cell.IsFlagged && cell is MineCell))
                     {
                         cell.Open();
                     }
                 }
             }
+            if (Game.Instance.Board.IsGameLost() && !Game.Instance.ClickOnMineStartsDefuseCountdown == true)
+                Game.Instance.GameLost();
         }
 
     }
