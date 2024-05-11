@@ -9,20 +9,22 @@ namespace Main
     public class BoardControl : TableLayoutPanel
     {
         private Board board;
+        private CellAppearanceFactory factory;
 
         public BoardControl(Board board) : base()
         {
             this.board = board;
             this.RowCount = board.Height;
             this.ColumnCount = board.Width;
-            this.Width = 600;
-            this.Height = 600;
+            this.factory = new CellAppearanceFactory();
+            this.Width = 800;
+            this.Height = 800;
             for (int y = 0; y < board.Height; y++)
             {
                 for (int x = 0; x < board.Width; x++)
                 {
                     Cell cell = board.GetCell(x, y);
-                    CellControl cellControl = new CellControl(cell);
+                    CellControl cellControl = new CellControl(cell, factory);
                     this.Controls.Add(cellControl, x, y);
                 }
             }
