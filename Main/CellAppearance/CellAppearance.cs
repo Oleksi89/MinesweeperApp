@@ -40,7 +40,7 @@ namespace Main
                     default:
                         if (type.StartsWith("number"))
                         {
-                            string number = type; // Видаляємо "number" з початку рядка
+                            string number = type;
                             appearance.Image = Image.FromFile($"{number}.gif");
                         }
                         break;

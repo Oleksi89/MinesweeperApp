@@ -50,8 +50,6 @@ namespace Main
             {
                 Game.Instance.ClicksMade++;
                 Open();
-                // Відкриваємо всі сусідні пустi клітин
-                RaiseOnClick();
 
             }
         }
@@ -88,7 +86,6 @@ namespace Main
                 {
                     Game.Instance.ClicksMade++;
                     Open();
-                    RaiseOnClick();
                      if (!Game.Instance.ClickOnMineStartsDefuseCountdown == true)                                            
                         Game.Instance.GameLost();                        
                     
@@ -140,10 +137,8 @@ namespace Main
                     Open();
                     Game.Instance.ClicksMade++;
 
-                }
-                
+                }               
             }           
-            RaiseOnClick();
         }
 
 
