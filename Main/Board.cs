@@ -160,6 +160,30 @@ namespace Main
             return mines == TotalMines && openCells + mines == totalCells;
         }
 
+        public double GetCorrectlyOpenedCellsPercentage()
+        {
+            int totalCells = Width * Height;
+            int corectlyOpenedCells = 0;
+
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    if (cells[i, j].IsRevealed && cells[i, j] is not MineCell)
+                    {
+                        corectlyOpenedCells++;
+                    }
+                    else if (cells[i, j] is MineCell && cells[i, j].IsFlagged 
+                        && !cells[i, j].IsRevealed)
+                    {
+                        corectlyOpenedCells++;
+                    }
+                }
+            }
+
+            return corectlyOpenedCells/(double)totalCells;
+        }
+
 
         public void InsertNumberCells()
         {

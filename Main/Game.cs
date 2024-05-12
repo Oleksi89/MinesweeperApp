@@ -18,18 +18,21 @@ namespace Main
         public static Game Instance => _instance ?? (_instance = new Game());
         private List<IGameObserver> observers = new List<IGameObserver>();
 
-        public Board _board;
+        private Board _board;
         private GameTimer gameTimer;
         private MineCounter mineCounter;
         public double BestBeginnerTime = 3;
 
         private bool gameInProgress;
+        private string gameResult;
+        private IGameHistorySaver _gameHistorySaver;
         public Board Board { get { return _board; }}
         public bool GameInProgress { get { return gameInProgress; } }
         public bool FirstClickMade = false;
         public int ClicksMade = 0;
         public GameSettings Settings { get; set; }
         public readonly string settingsPath = "settings.dat";
+        public readonly string gameHistoryPath = "gameHistory.dat";
 
         private Game() { }
 
@@ -43,6 +46,8 @@ namespace Main
 
             Settings = new GameSettings(new EasyDifficultyLevelStrategy());
             LoadSettings();
+
+            _gameHistorySaver = new JsonGameHistorySaver();
         }
 
         private List<IGameSetting> gameSettings = new List<IGameSetting>();
@@ -78,11 +83,29 @@ namespace Main
             }
         }
 
+        public GameHistoryEntry GetGameData()
+        {
+            var historyEntry = new GameHistoryEntry
+            {
+                DifficultyLevel = this.Settings.DifficultyLevel,
+                FirstClickIsSafe = this.Settings.FirstClickIsSafe,
+                ClickNumberOpensAdjacentCells = this.Settings.ClickNumberOpensAdjacentCells,
+                ClickOnMineStartsDefuseCountdown = this.Settings.ClickOnMineStartsDefuseCountdown,
+                AllMinesFlaggedOpensRemainingCells = this.Settings.AllMinesFlaggedOpensRemainingCells,
+                PercentageOfCorrectlyOpenedCells = (double)Board.GetCorrectlyOpenedCellsPercentage(),
+                EndTime = DateTime.Now,
+                Result = this.gameResult,
+                ClicksMade = this.ClicksMade,
+                GameTime = gameTimer.TimeElapsed
+            };
 
+            return historyEntry;
+        }
 
         public void StartGame(string playerName)
         {
             ClicksMade = 0;
+            gameResult = "none";
             ClearSettings();
 
             foreach (var gameSetting in gameSettings)
@@ -107,12 +130,16 @@ namespace Main
         public void GameLost()
         {
             Board.OpenRemainingMines();
+            
+            gameResult = "Lost";
             EndGame();
             NotifyObservers("game lost");           
             
         }
         public void GameWon()
         {
+            
+            gameResult = "Won";
             EndGame();
             NotifyObservers("game won");
             
@@ -123,8 +150,11 @@ namespace Main
             gameInProgress = false;
             //_board = null;
             NotifyObservers("game ended");
-            
+            var entry = GetGameData();
+            _gameHistorySaver.Save(entry, gameHistoryPath);
         }
+
+        
 
         public void SaveSettings()
         {
