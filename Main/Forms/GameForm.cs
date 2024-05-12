@@ -4,13 +4,19 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Main;
+using System.Text.Json;
 
 namespace Main
 {
+
+
+
     public partial class GameForm : Form, IGameObserver
     {
         private Game game;
@@ -18,14 +24,16 @@ namespace Main
         private GameTimer gameTimer;
         private MineCounter mineCounter;
         private GameWonControl gameWonControl;
+        private string settingsPath = "settings.dat";
 
 
         public GameForm()
         {
             InitializeComponent();
-
+            
             game = Game.Instance;
             game.Initialize();
+            
             game.RegisterObserver(this);
             gameTimer = new GameTimer(timerLabel);
             game.RegisterObserver(gameTimer);
@@ -35,6 +43,7 @@ namespace Main
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
+            LoadGameSettings(settingsPath);
         }
 
         public void Update(string message)
@@ -69,7 +78,62 @@ namespace Main
 
         }
 
-        private void startGameButton_Click(object sender, EventArgs e)
+
+
+    public void SaveGameSettings(GameSettings settings, string filePath)
+    {
+
+            string jsonString = JsonSerializer.Serialize(settings);
+            File.WriteAllText(filePath, jsonString);
+    }
+
+        public void LoadGameSettings(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                string jsonString = File.ReadAllText(filePath);
+                GameSettings settings = JsonSerializer.Deserialize<GameSettings>(jsonString);
+
+                switch (settings.DifficultyLevel)
+                {
+                    case "Easy":
+                        settings.DifficultyLevelStrategy = new EasyDifficultyLevelStrategy();
+                        break;
+                    case "Medium":
+                        settings.DifficultyLevelStrategy = new MediumDifficultyLevelStrategy();
+                        break;
+                    case "Hard":
+                        settings.DifficultyLevelStrategy = new HardDifficultyLevelStrategy();
+                        break;
+                }
+
+                if (settings.FirstClickIsSafe)
+                {
+                    game.AddGameSetting(new SafeStart());
+                }
+
+                if (settings.ClickNumberOpensAdjacentCells)
+                {
+                    game.AddGameSetting(new SafeZone());
+                }
+
+                if (settings.ClickOnMineStartsDefuseCountdown)
+                {
+                    game.AddGameSetting(new Defuse());
+                }
+
+                if (settings.AllMinesFlaggedOpensRemainingCells)
+                {
+                    game.AddGameSetting(new OpenRemaining());
+                }
+
+                game.Settings = settings;                
+            }
+        }
+
+
+
+    private void startGameButton_Click(object sender, EventArgs e)
         {
             string playerName = playerNameTextBox.Text;
             game.StartGame(playerName);
@@ -106,6 +170,11 @@ namespace Main
             {
                 Game.Instance.Board.OpenRemainingCells();
             }
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveGameSettings(game.Settings, settingsPath);
         }
     }
 

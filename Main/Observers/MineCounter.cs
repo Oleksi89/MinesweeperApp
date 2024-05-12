@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Main
 {
+    [Serializable]
     public class MineCounter : IGameObserver
     {
         private Label mineCounterLabel;
