@@ -11,18 +11,19 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Main
 {
+
     public class Game
     {
         private static Game _instance;
         public static Game Instance => _instance ?? (_instance = new Game());
         private List<IGameObserver> observers = new List<IGameObserver>();
 
-        private Board _board;
+        public Board _board;
 
         public double BestBeginnerTime = 3;
 
         private bool gameInProgress;
-        public Board Board { get { return _board; }  }
+        public Board Board { get { return _board; }}
         public bool GameInProgress { get { return gameInProgress; } }
         public bool FirstClickMade = false;
         public int ClicksMade = 0;

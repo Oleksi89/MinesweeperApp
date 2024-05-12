@@ -151,6 +151,7 @@
             Controls.Add(playerNameTextBox);
             Name = "GameForm";
             Text = "GameForm";
+            FormClosing += GameForm_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

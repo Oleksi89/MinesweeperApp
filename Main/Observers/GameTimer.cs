@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Main
 {
+    [Serializable]
     public class GameTimer : IGameObserver
     {
         private System.Windows.Forms.Timer timer;
