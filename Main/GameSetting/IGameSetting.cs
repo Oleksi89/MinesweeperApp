@@ -16,7 +16,7 @@ namespace Main
         public void Apply(Game game)
         {
             // Перший клік завжди на пусту клітинку
-            game.FirstClickIsSafe = true;
+            game.Settings.FirstClickIsSafe = true;
         }
     }
 
@@ -25,7 +25,7 @@ namespace Main
         public void Apply(Game game)
         {
             // Клік на цифру відкриває всі невідкриті сусідні клітинки
-            game.ClickNumberOpensAdjacentCells = true;
+            game.Settings.ClickNumberOpensAdjacentCells = true;
         }
     }
 
@@ -34,7 +34,7 @@ namespace Main
         public void Apply(Game game)
         {
             // Клік на міну не закінчує гру
-            game.ClickOnMineStartsDefuseCountdown = true;
+            game.Settings.ClickOnMineStartsDefuseCountdown = true;
         }
     }
 
@@ -43,7 +43,7 @@ namespace Main
         public void Apply(Game game)
         {
             // Коли всі міни позначені, можна відкрити всі залишені клітинки
-            game.AllMinesFlaggedOpensRemainingCells = true;
+            game.Settings.AllMinesFlaggedOpensRemainingCells = true;
         }
     }
 

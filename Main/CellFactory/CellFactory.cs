@@ -76,7 +76,7 @@ namespace Main
             if (!IsFlagged && !IsRevealed)
             {
                 
-                if (Game.Instance.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
+                if (Game.Instance.Settings.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
                 {
                     
                     Game.Instance.GenerateNewBoardAndClick(X, Y);
@@ -86,7 +86,7 @@ namespace Main
                 {
                     Game.Instance.ClicksMade++;
                     Open();
-                     if (!Game.Instance.ClickOnMineStartsDefuseCountdown == true)                                            
+                     if (!Game.Instance.Settings.ClickOnMineStartsDefuseCountdown == true)                                            
                         Game.Instance.GameLost();                        
                     
                     
@@ -122,11 +122,11 @@ namespace Main
             // Якщо клітинка з числом і не позначена прапорцем, відкриваємо її
             if (!IsFlagged)
             {
-                if (Game.Instance.ClickNumberOpensAdjacentCells && IsRevealed)
+                if (Game.Instance.Settings.ClickNumberOpensAdjacentCells && IsRevealed)
                 {
                     Game.Instance.OpenNumberAdjacentCells(X, Y);
                 }
-                else if (Game.Instance.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
+                else if (Game.Instance.Settings.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
                 {
                    
                     Game.Instance.GenerateNewBoardAndClick(X, Y);

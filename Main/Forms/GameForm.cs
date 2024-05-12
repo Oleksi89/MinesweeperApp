@@ -62,7 +62,7 @@ namespace Main
             }
             // playerInfoLabel.Text = $"{game.ClicksMade}";
 
-            if (message == "regenerate board" && Game.Instance.FirstClickIsSafe)
+            if (message == "regenerate board" && Game.Instance.Settings.FirstClickIsSafe)
             {
                 boardControl.UpdateBoard();
             }
@@ -102,7 +102,7 @@ namespace Main
 
         private void openRemainingCellsButton_Click(object sender, EventArgs e)
         {
-            if (Game.Instance.AllMinesFlaggedOpensRemainingCells && Game.Instance.Board.TotalMines == Game.Instance.Board.GetCells().Cast<Cell>().Count(c => c.IsFlagged))
+            if (Game.Instance.Settings.AllMinesFlaggedOpensRemainingCells && Game.Instance.Board.TotalMines == Game.Instance.Board.GetCells().Cast<Cell>().Count(c => c.IsFlagged))
             {
                 Game.Instance.Board.OpenRemainingCells();
             }

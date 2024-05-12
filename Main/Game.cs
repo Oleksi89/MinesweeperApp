@@ -18,10 +18,7 @@ namespace Main
         private List<IGameObserver> observers = new List<IGameObserver>();
 
         private Board _board;
-        public bool FirstClickIsSafe { get; set; }
-        public bool ClickNumberOpensAdjacentCells { get; set; }
-        public bool ClickOnMineStartsDefuseCountdown { get; set; }
-        public bool AllMinesFlaggedOpensRemainingCells { get; set; }
+
         public double BestBeginnerTime = 3;
 
         private bool gameInProgress;
@@ -91,10 +88,10 @@ namespace Main
 
         public void ClearSettings()
         {
-            FirstClickIsSafe = false;
-            ClickNumberOpensAdjacentCells = false;
-            ClickOnMineStartsDefuseCountdown = false;
-            AllMinesFlaggedOpensRemainingCells = false;
+            Settings.FirstClickIsSafe = false;
+            Settings.ClickNumberOpensAdjacentCells = false;
+            Settings.ClickOnMineStartsDefuseCountdown = false;
+            Settings.AllMinesFlaggedOpensRemainingCells = false;
         }
 
         public void GameLost()

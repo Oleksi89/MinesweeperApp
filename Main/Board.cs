@@ -304,7 +304,7 @@ namespace Main
                     }
                 }
             }
-            if (Game.Instance.Board.IsGameLost() && !Game.Instance.ClickOnMineStartsDefuseCountdown == true)
+            if (Game.Instance.Board.IsGameLost() && !Game.Instance.Settings.ClickOnMineStartsDefuseCountdown == true)
                 Game.Instance.GameLost();
         }
 
