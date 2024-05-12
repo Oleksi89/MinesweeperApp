@@ -19,7 +19,8 @@ namespace Main
         private List<IGameObserver> observers = new List<IGameObserver>();
 
         public Board _board;
-
+        private GameTimer gameTimer;
+        private MineCounter mineCounter;
         public double BestBeginnerTime = 3;
 
         private bool gameInProgress;
@@ -32,8 +33,14 @@ namespace Main
 
         private Game() { }
 
-        public void Initialize()
+        public void Initialize(Label timerLabel, Label mineCounterLabel)
         {
+            gameTimer = new GameTimer(timerLabel);
+            RegisterObserver(gameTimer);
+
+            mineCounter = new MineCounter(mineCounterLabel);
+            RegisterObserver(mineCounter);
+
             Settings = new GameSettings(new EasyDifficultyLevelStrategy());
             LoadSettings();
         }
