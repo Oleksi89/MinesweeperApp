@@ -24,7 +24,6 @@ namespace Main
         private GameTimer gameTimer;
         private MineCounter mineCounter;
         private GameWonControl gameWonControl;
-        private string settingsPath = "settings.dat";
 
 
         public GameForm()
@@ -43,7 +42,6 @@ namespace Main
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
-            LoadGameSettings(settingsPath);
         }
 
         public void Update(string message)
@@ -77,61 +75,6 @@ namespace Main
             }
 
         }
-
-
-
-    public void SaveGameSettings(GameSettings settings, string filePath)
-    {
-
-            string jsonString = JsonSerializer.Serialize(settings);
-            File.WriteAllText(filePath, jsonString);
-    }
-
-        public void LoadGameSettings(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                string jsonString = File.ReadAllText(filePath);
-                GameSettings settings = JsonSerializer.Deserialize<GameSettings>(jsonString);
-
-                switch (settings.DifficultyLevel)
-                {
-                    case "Easy":
-                        settings.DifficultyLevelStrategy = new EasyDifficultyLevelStrategy();
-                        break;
-                    case "Medium":
-                        settings.DifficultyLevelStrategy = new MediumDifficultyLevelStrategy();
-                        break;
-                    case "Hard":
-                        settings.DifficultyLevelStrategy = new HardDifficultyLevelStrategy();
-                        break;
-                }
-
-                if (settings.FirstClickIsSafe)
-                {
-                    game.AddGameSetting(new SafeStart());
-                }
-
-                if (settings.ClickNumberOpensAdjacentCells)
-                {
-                    game.AddGameSetting(new SafeZone());
-                }
-
-                if (settings.ClickOnMineStartsDefuseCountdown)
-                {
-                    game.AddGameSetting(new Defuse());
-                }
-
-                if (settings.AllMinesFlaggedOpensRemainingCells)
-                {
-                    game.AddGameSetting(new OpenRemaining());
-                }
-
-                game.Settings = settings;                
-            }
-        }
-
-
 
     private void startGameButton_Click(object sender, EventArgs e)
         {
@@ -174,7 +117,7 @@ namespace Main
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveGameSettings(game.Settings, settingsPath);
+            game.SaveSettings();
         }
     }
 

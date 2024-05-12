@@ -7,7 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Text.Json;
 
 namespace Main
 {
@@ -28,12 +28,14 @@ namespace Main
         public bool FirstClickMade = false;
         public int ClicksMade = 0;
         public GameSettings Settings { get; set; }
+        public readonly string settingsPath = "settings.dat";
 
         private Game() { }
 
         public void Initialize()
         {
             Settings = new GameSettings(new EasyDifficultyLevelStrategy());
+            LoadSettings();
         }
 
         private List<IGameSetting> gameSettings = new List<IGameSetting>();
@@ -116,6 +118,59 @@ namespace Main
             NotifyObservers("game ended");
             
         }
+
+        public void SaveSettings()
+        {
+
+            string jsonString = JsonSerializer.Serialize(Settings);
+            File.WriteAllText(settingsPath, jsonString);
+        }
+
+        public void LoadSettings()
+        {
+            if (File.Exists(settingsPath))
+            {
+                string jsonString = File.ReadAllText(settingsPath);
+                GameSettings settings = JsonSerializer.Deserialize<GameSettings>(jsonString);
+
+                switch (settings.DifficultyLevel)
+                {
+                    case "Easy":
+                        settings.DifficultyLevelStrategy = new EasyDifficultyLevelStrategy();
+                        break;
+                    case "Medium":
+                        settings.DifficultyLevelStrategy = new MediumDifficultyLevelStrategy();
+                        break;
+                    case "Hard":
+                        settings.DifficultyLevelStrategy = new HardDifficultyLevelStrategy();
+                        break;
+                }
+
+                if (settings.FirstClickIsSafe)
+                {
+                    AddGameSetting(new SafeStart());
+                }
+
+                if (settings.ClickNumberOpensAdjacentCells)
+                {
+                    AddGameSetting(new SafeZone());
+                }
+
+                if (settings.ClickOnMineStartsDefuseCountdown)
+                {
+                    AddGameSetting(new Defuse());
+                }
+
+                if (settings.AllMinesFlaggedOpensRemainingCells)
+                {
+                    AddGameSetting(new OpenRemaining());
+                }
+
+                Settings = settings;
+            }
+        }
+
+
         public void OpenNumberAdjacentCells(int x, int y)
         {
             Board.OpenNumberAdjacentCells( x, y);
