@@ -21,24 +21,22 @@ namespace Main
     {
         private Game game;
         private BoardControl boardControl;
-        private GameTimer gameTimer;
-        private MineCounter mineCounter;
+
+
         private GameWonControl gameWonControl;
 
 
         public GameForm()
         {
             InitializeComponent();
-            
+
             game = Game.Instance;
-            game.Initialize();
-            
+            game.Initialize(timerLabel, mineCounterLabel);
+
             game.RegisterObserver(this);
-            gameTimer = new GameTimer(timerLabel);
-            game.RegisterObserver(gameTimer);
+
             gameWonControl = new GameWonControl();
-            mineCounter = new MineCounter(mineCounterLabel);
-            game.RegisterObserver(mineCounter);
+
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
@@ -49,7 +47,7 @@ namespace Main
             if (message == "game won")
             {
 
-                gameWonControl.UpdateGameWonInfo(gameTimer.TimeElapsed, game.BestBeginnerTime, game.ClicksMade);
+                gameWonControl.UpdateGameWonInfo(/*gameTimer.TimeElapsed*/ 2, game.BestBeginnerTime, game.ClicksMade);
                 gameWonControl.Visible = true;
                 gameWonControl.BringToFront();
             }
@@ -76,7 +74,7 @@ namespace Main
 
         }
 
-    private void startGameButton_Click(object sender, EventArgs e)
+        private void startGameButton_Click(object sender, EventArgs e)
         {
             string playerName = playerNameTextBox.Text;
             game.StartGame(playerName);
@@ -118,6 +116,11 @@ namespace Main
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             game.SaveSettings();
+        }
+
+        private void statisticsButton_Click(object sender, EventArgs e)
+        {
+            new StatisticsForm(game).ShowDialog();
         }
     }
 

@@ -38,6 +38,7 @@
             timerLabel = new Label();
             playerInfoLabel = new Label();
             openRemainingCellsButton = new Button();
+            statisticsButton = new Button();
             SuspendLayout();
             // 
             // playerNameTextBox
@@ -89,7 +90,7 @@
             // 
             // pauseButton
             // 
-            pauseButton.Location = new Point(464, 282);
+            pauseButton.Location = new Point(464, 315);
             pauseButton.Name = "pauseButton";
             pauseButton.Size = new Size(107, 23);
             pauseButton.TabIndex = 5;
@@ -134,11 +135,22 @@
             openRemainingCellsButton.UseVisualStyleBackColor = true;
             openRemainingCellsButton.Click += openRemainingCellsButton_Click;
             // 
+            // statisticsButton
+            // 
+            statisticsButton.Location = new Point(464, 276);
+            statisticsButton.Name = "statisticsButton";
+            statisticsButton.Size = new Size(107, 23);
+            statisticsButton.TabIndex = 10;
+            statisticsButton.Text = "statisticsButton";
+            statisticsButton.UseVisualStyleBackColor = true;
+            statisticsButton.Click += statisticsButton_Click;
+            // 
             // GameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(statisticsButton);
             Controls.Add(openRemainingCellsButton);
             Controls.Add(playerInfoLabel);
             Controls.Add(timerLabel);
@@ -168,5 +180,6 @@
         private Label timerLabel;
         private Label playerInfoLabel;
         private Button openRemainingCellsButton;
+        private Button statisticsButton;
     }
 }
