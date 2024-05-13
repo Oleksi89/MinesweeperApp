@@ -28,7 +28,7 @@ namespace Main
         private string gameResult;
         private IGameHistorySaver _gameHistorySaver;
         private ISimilarGamesStatistic _statisticCalculator;
-        public Board Board { get { return _board; }}
+        public Board Board { get { return _board; } }
         public bool GameInProgress { get { return gameInProgress; } }
         public int ClicksMade = 0;
         public GameSettings Settings { get; set; }
@@ -121,12 +121,12 @@ namespace Main
             _board = new Board(Settings.DifficultyLevelStrategy.GetDifficultyLevel().Width, Settings.DifficultyLevelStrategy.GetDifficultyLevel().Height);
             _board.GenerateBoard(Settings.DifficultyLevelStrategy);
             NotifyObservers("game prepared");
-            
+
         }
 
         public void StartGame()
         {
-            
+
             NotifyObservers("game started");
             gameInProgress = true;
 
@@ -134,13 +134,20 @@ namespace Main
 
         public void PauseGame()
         {
-            gameInProgress = false;
-            NotifyObservers("game paused");
+            if (gameInProgress && gameResult=="none")
+            {
+                gameInProgress = false;
+                NotifyObservers("game paused");
+            }
         }
         public void ResumeGame()
         {
-            gameInProgress = true;
-            NotifyObservers("game resumed");
+            if (!gameInProgress && gameResult == "none" && ClicksMade!=0)
+            {
+                gameInProgress = true;
+                NotifyObservers("game resumed");
+            }
+
         }
 
         public void ClearSettings()
@@ -151,23 +158,23 @@ namespace Main
         public void GameLost()
         {
             Board.OpenRemainingMines();
-            
+
             gameResult = "Lost";
             EndGame();
-            NotifyObservers("game lost");           
-            
+            NotifyObservers("game lost");
+
         }
         public void GameWon()
         {
-            
+
             gameResult = "Won";
             EndGame();
             NotifyObservers("game won");
-            
+
         }
-            public void EndGame()
+        public void EndGame()
         {
-            
+
             gameInProgress = false;
             //_board = null;
             NotifyObservers("game ended");
@@ -175,7 +182,7 @@ namespace Main
             _gameHistorySaver.Save(entry, gameHistoryPath);
         }
 
-        
+
 
         public void SaveSettings()
         {
@@ -231,7 +238,7 @@ namespace Main
 
         public void OpenNumberAdjacentCells(int x, int y)
         {
-            Board.OpenNumberAdjacentCells( x, y);
+            Board.OpenNumberAdjacentCells(x, y);
         }
         public void GenerateNewBoardAndClick(int x, int y)
         {

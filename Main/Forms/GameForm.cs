@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Main;
 using System.Text.Json;
+using Main.Controls;
 
 namespace Main
 {
@@ -24,7 +25,7 @@ namespace Main
 
 
         private GameWonControl gameWonControl;
-
+        private PauseControl pauseControl;
 
         public GameForm()
         {
@@ -35,11 +36,15 @@ namespace Main
 
             game.RegisterObserver(this);
 
-            gameWonControl = new GameWonControl();
-
+            gameWonControl = new GameWonControl();            
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
+
+            pauseControl = new PauseControl(game);
+            this.Controls.Add(pauseControl);
+            pauseControl.Dock = DockStyle.Fill;
+            pauseControl.Visible = false;
         }
 
         public void Update(string message)
@@ -91,7 +96,9 @@ namespace Main
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            new PauseMenuForm(game).ShowDialog();
+            game.PauseGame();
+            pauseControl.Visible = true;
+            pauseControl.BringToFront();
         }
 
         private void GameForm_Load(object sender, EventArgs e)

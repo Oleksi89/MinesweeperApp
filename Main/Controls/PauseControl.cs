@@ -22,7 +22,8 @@ namespace Main.Controls
 
         private void resumeButton_Click(object sender, EventArgs e)
         {
-            _game.ResumeGame(); 
+            _game.ResumeGame();
+            this.Visible = false;
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
