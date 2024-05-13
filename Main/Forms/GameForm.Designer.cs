@@ -39,19 +39,19 @@
             playerInfoLabel = new Label();
             openRemainingCellsButton = new Button();
             statisticsButton = new Button();
-            panel1 = new Panel();
+            BoardPanel = new Panel();
             SuspendLayout();
             // 
             // playerNameTextBox
             // 
-            playerNameTextBox.Location = new Point(832, 66);
+            playerNameTextBox.Location = new Point(979, 82);
             playerNameTextBox.Name = "playerNameTextBox";
             playerNameTextBox.Size = new Size(100, 23);
             playerNameTextBox.TabIndex = 0;
             // 
             // startGameButton
             // 
-            startGameButton.Location = new Point(441, 12);
+            startGameButton.Location = new Point(586, 12);
             startGameButton.Name = "startGameButton";
             startGameButton.Size = new Size(81, 77);
             startGameButton.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // endGameButton
             // 
-            endGameButton.Location = new Point(283, 386);
+            endGameButton.Location = new Point(24, 23);
             endGameButton.Name = "endGameButton";
             endGameButton.Size = new Size(116, 23);
             endGameButton.TabIndex = 2;
@@ -71,7 +71,7 @@
             // 
             // loginButton
             // 
-            loginButton.Location = new Point(283, 434);
+            loginButton.Location = new Point(24, 71);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(107, 23);
             loginButton.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             // settingsButton
             // 
-            settingsButton.Location = new Point(283, 480);
+            settingsButton.Location = new Point(24, 117);
             settingsButton.Name = "settingsButton";
             settingsButton.Size = new Size(107, 23);
             settingsButton.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             // pauseButton
             // 
-            pauseButton.Location = new Point(283, 562);
+            pauseButton.Location = new Point(24, 199);
             pauseButton.Name = "pauseButton";
             pauseButton.Size = new Size(107, 23);
             pauseButton.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             mineCounterLabel.AutoSize = true;
             mineCounterLabel.Font = new Font("AniMe Matrix - MB_EN", 20.2499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            mineCounterLabel.Location = new Point(283, 27);
+            mineCounterLabel.Location = new Point(430, 43);
             mineCounterLabel.Name = "mineCounterLabel";
             mineCounterLabel.Size = new Size(119, 32);
             mineCounterLabel.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             timerLabel.AutoSize = true;
             timerLabel.Font = new Font("AniMe Matrix - MB_EN", 20.2499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            timerLabel.Location = new Point(563, 27);
+            timerLabel.Location = new Point(710, 43);
             timerLabel.Name = "timerLabel";
             timerLabel.Size = new Size(125, 32);
             timerLabel.TabIndex = 7;
@@ -122,7 +122,7 @@
             // playerInfoLabel
             // 
             playerInfoLabel.AutoSize = true;
-            playerInfoLabel.Location = new Point(832, 23);
+            playerInfoLabel.Location = new Point(979, 39);
             playerInfoLabel.Name = "playerInfoLabel";
             playerInfoLabel.Size = new Size(88, 15);
             playerInfoLabel.TabIndex = 8;
@@ -130,7 +130,7 @@
             // 
             // openRemainingCellsButton
             // 
-            openRemainingCellsButton.Location = new Point(316, 107);
+            openRemainingCellsButton.Location = new Point(12, 259);
             openRemainingCellsButton.Name = "openRemainingCellsButton";
             openRemainingCellsButton.Size = new Size(186, 70);
             openRemainingCellsButton.TabIndex = 9;
@@ -140,7 +140,7 @@
             // 
             // statisticsButton
             // 
-            statisticsButton.Location = new Point(283, 523);
+            statisticsButton.Location = new Point(24, 160);
             statisticsButton.Name = "statisticsButton";
             statisticsButton.Size = new Size(107, 23);
             statisticsButton.TabIndex = 10;
@@ -148,21 +148,25 @@
             statisticsButton.UseVisualStyleBackColor = true;
             statisticsButton.Click += statisticsButton_Click;
             // 
-            // panel1
+            // BoardPanel
             // 
-            panel1.Anchor = AnchorStyles.Top;
-            panel1.AutoSize = true;
-            panel1.Location = new Point(421, 201);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(485, 310);
-            panel1.TabIndex = 11;
+            BoardPanel.Anchor = AnchorStyles.Top;
+            BoardPanel.AutoSize = true;
+            BoardPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BoardPanel.BorderStyle = BorderStyle.FixedSingle;
+            BoardPanel.Location = new Point(622, 117);
+            BoardPanel.Name = "BoardPanel";
+            BoardPanel.Size = new Size(2, 2);
+            BoardPanel.TabIndex = 11;
+            BoardPanel.Resize += BoardPanel_Resize;
             // 
             // GameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1009, 643);
-            Controls.Add(panel1);
+            AutoSize = true;
+            ClientSize = new Size(1232, 643);
+            Controls.Add(BoardPanel);
             Controls.Add(statisticsButton);
             Controls.Add(openRemainingCellsButton);
             Controls.Add(playerInfoLabel);
@@ -174,6 +178,7 @@
             Controls.Add(endGameButton);
             Controls.Add(startGameButton);
             Controls.Add(playerNameTextBox);
+            MinimumSize = new Size(1248, 682);
             Name = "GameForm";
             Text = "GameForm";
             FormClosing += GameForm_FormClosing;
@@ -194,6 +199,6 @@
         private Label playerInfoLabel;
         private Button openRemainingCellsButton;
         private Button statisticsButton;
-        private Panel panel1;
+        private Panel BoardPanel;
     }
 }

@@ -62,10 +62,10 @@ namespace Main
             {
                 if (boardControl != null)
                 {
-                    this.Controls.Remove(boardControl);
+                    BoardPanel.Controls.Remove(boardControl);
                 }
                 boardControl = new BoardControl(game.Board);
-                this.Controls.Add(boardControl);
+                BoardPanel.Controls.Add(boardControl);
             }
             // playerInfoLabel.Text = $"{game.ClicksMade}";
 
@@ -123,6 +123,11 @@ namespace Main
         private void statisticsButton_Click(object sender, EventArgs e)
         {
             new StatisticsForm(game).ShowDialog();
+        }
+
+        private void BoardPanel_Resize(object sender, EventArgs e)
+        {
+            BoardPanel.Left = (this.ClientSize.Width - BoardPanel.Width) / 2;
         }
     }
 

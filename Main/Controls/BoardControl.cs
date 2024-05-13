@@ -17,8 +17,8 @@ namespace Main
             this.RowCount = board.Height;
             this.ColumnCount = board.Width;
             this.factory = new CellAppearanceFactory();
-            this.Width = 800;
-            this.Height = 800;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             for (int y = 0; y < board.Height; y++)
             {
                 for (int x = 0; x < board.Width; x++)
