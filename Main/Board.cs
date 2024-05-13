@@ -173,8 +173,7 @@ namespace Main
                     {
                         corectlyOpenedCells++;
                     }
-                    else if (cells[i, j] is MineCell && cells[i, j].IsFlagged 
-                        && !cells[i, j].IsRevealed)
+                    else if (cells[i, j] is MineCell && !cells[i, j].IsRevealed)
                     {
                         corectlyOpenedCells++;
                     }

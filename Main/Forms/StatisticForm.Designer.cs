@@ -48,6 +48,8 @@
             winPercentageTextBox = new TextBox();
             averageClicksTextBox = new TextBox();
             averageGameTimeTextBox = new TextBox();
+            label9 = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)GamesHistoryGridView).BeginInit();
             SuspendLayout();
             // 
@@ -57,7 +59,7 @@
             GamesHistoryGridView.AllowUserToDeleteRows = false;
             GamesHistoryGridView.AllowUserToResizeColumns = false;
             GamesHistoryGridView.AllowUserToResizeRows = false;
-            GamesHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            GamesHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("AniMe Matrix - MB_EN", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -75,23 +77,23 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             GamesHistoryGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            GamesHistoryGridView.Location = new Point(12, 172);
+            GamesHistoryGridView.Location = new Point(0, 172);
             GamesHistoryGridView.Name = "GamesHistoryGridView";
             GamesHistoryGridView.ReadOnly = true;
             GamesHistoryGridView.RowHeadersVisible = false;
             GamesHistoryGridView.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            GamesHistoryGridView.Size = new Size(951, 439);
+            GamesHistoryGridView.Size = new Size(1205, 465);
             GamesHistoryGridView.TabIndex = 0;
             GamesHistoryGridView.CellFormatting += GamesHistoryGridView_CellFormatting;
             // 
             // applyFiltersButton
             // 
             applyFiltersButton.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            applyFiltersButton.Location = new Point(774, 39);
+            applyFiltersButton.Location = new Point(810, 40);
             applyFiltersButton.Name = "applyFiltersButton";
             applyFiltersButton.Size = new Size(75, 23);
             applyFiltersButton.TabIndex = 1;
-            applyFiltersButton.Text = "applyFiltersButton";
+            applyFiltersButton.Text = "apply";
             applyFiltersButton.UseVisualStyleBackColor = true;
             applyFiltersButton.Click += applyFiltersButton_Click;
             // 
@@ -101,7 +103,7 @@
             difficultyLevelComboBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
             difficultyLevelComboBox.FormattingEnabled = true;
             difficultyLevelComboBox.Items.AddRange(new object[] { "All", "Easy", "Medium", "Hard" });
-            difficultyLevelComboBox.Location = new Point(127, 40);
+            difficultyLevelComboBox.Location = new Point(163, 41);
             difficultyLevelComboBox.Name = "difficultyLevelComboBox";
             difficultyLevelComboBox.Size = new Size(121, 23);
             difficultyLevelComboBox.TabIndex = 2;
@@ -111,7 +113,7 @@
             timePeriodComboBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
             timePeriodComboBox.FormattingEnabled = true;
             timePeriodComboBox.Items.AddRange(new object[] { "All Time", "Today", "Last Week", "Last Month", "Last Year" });
-            timePeriodComboBox.Location = new Point(333, 40);
+            timePeriodComboBox.Location = new Point(369, 41);
             timePeriodComboBox.Name = "timePeriodComboBox";
             timePeriodComboBox.Size = new Size(121, 23);
             timePeriodComboBox.TabIndex = 3;
@@ -121,7 +123,7 @@
             resultComboBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
             resultComboBox.FormattingEnabled = true;
             resultComboBox.Items.AddRange(new object[] { "All", "Won", "Lost" });
-            resultComboBox.Location = new Point(564, 40);
+            resultComboBox.Location = new Point(600, 41);
             resultComboBox.Name = "resultComboBox";
             resultComboBox.Size = new Size(121, 23);
             resultComboBox.TabIndex = 4;
@@ -130,7 +132,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label1.Location = new Point(23, 43);
+            label1.Location = new Point(59, 44);
             label1.Name = "label1";
             label1.Size = new Size(98, 15);
             label1.TabIndex = 5;
@@ -140,17 +142,17 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label2.Location = new Point(280, 43);
+            label2.Location = new Point(316, 44);
             label2.Name = "label2";
-            label2.Size = new Size(47, 15);
+            label2.Size = new Size(53, 15);
             label2.TabIndex = 6;
-            label2.Text = "Time:";
+            label2.Text = "Date:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label3.Location = new Point(485, 43);
+            label3.Location = new Point(521, 44);
             label3.Name = "label3";
             label3.Size = new Size(72, 15);
             label3.TabIndex = 7;
@@ -160,17 +162,17 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label4.Location = new Point(23, 95);
+            label4.Location = new Point(62, 104);
             label4.Name = "label4";
-            label4.Size = new Size(98, 15);
+            label4.Size = new Size(110, 15);
             label4.TabIndex = 8;
-            label4.Text = "Difficulty:";
+            label4.Text = "Difficulties:";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label5.Location = new Point(230, 95);
+            label5.Location = new Point(427, 104);
             label5.Name = "label5";
             label5.Size = new Size(161, 15);
             label5.TabIndex = 9;
@@ -180,7 +182,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label6.Location = new Point(414, 95);
+            label6.Location = new Point(611, 104);
             label6.Name = "label6";
             label6.Size = new Size(143, 15);
             label6.TabIndex = 10;
@@ -190,7 +192,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label7.Location = new Point(585, 95);
+            label7.Location = new Point(782, 104);
             label7.Name = "label7";
             label7.Size = new Size(143, 15);
             label7.TabIndex = 11;
@@ -200,7 +202,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            label8.Location = new Point(774, 95);
+            label8.Location = new Point(971, 104);
             label8.Name = "label8";
             label8.Size = new Size(174, 15);
             label8.TabIndex = 12;
@@ -209,16 +211,16 @@
             // difficultyLevelPercentagesTextBox
             // 
             difficultyLevelPercentagesTextBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            difficultyLevelPercentagesTextBox.Location = new Point(23, 113);
+            difficultyLevelPercentagesTextBox.Location = new Point(62, 125);
             difficultyLevelPercentagesTextBox.Name = "difficultyLevelPercentagesTextBox";
             difficultyLevelPercentagesTextBox.ReadOnly = true;
-            difficultyLevelPercentagesTextBox.Size = new Size(187, 22);
+            difficultyLevelPercentagesTextBox.Size = new Size(334, 22);
             difficultyLevelPercentagesTextBox.TabIndex = 13;
             // 
             // averageCorrectlyOpenedCellsTextBox
             // 
             averageCorrectlyOpenedCellsTextBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            averageCorrectlyOpenedCellsTextBox.Location = new Point(230, 116);
+            averageCorrectlyOpenedCellsTextBox.Location = new Point(427, 125);
             averageCorrectlyOpenedCellsTextBox.Name = "averageCorrectlyOpenedCellsTextBox";
             averageCorrectlyOpenedCellsTextBox.ReadOnly = true;
             averageCorrectlyOpenedCellsTextBox.Size = new Size(100, 22);
@@ -227,7 +229,7 @@
             // winPercentageTextBox
             // 
             winPercentageTextBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            winPercentageTextBox.Location = new Point(414, 116);
+            winPercentageTextBox.Location = new Point(611, 125);
             winPercentageTextBox.Name = "winPercentageTextBox";
             winPercentageTextBox.ReadOnly = true;
             winPercentageTextBox.Size = new Size(100, 22);
@@ -236,7 +238,7 @@
             // averageClicksTextBox
             // 
             averageClicksTextBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            averageClicksTextBox.Location = new Point(585, 116);
+            averageClicksTextBox.Location = new Point(782, 125);
             averageClicksTextBox.Name = "averageClicksTextBox";
             averageClicksTextBox.ReadOnly = true;
             averageClicksTextBox.Size = new Size(100, 22);
@@ -245,17 +247,39 @@
             // averageGameTimeTextBox
             // 
             averageGameTimeTextBox.Font = new Font("AniMe Matrix - MB_EN", 9F);
-            averageGameTimeTextBox.Location = new Point(774, 116);
+            averageGameTimeTextBox.Location = new Point(971, 125);
             averageGameTimeTextBox.Name = "averageGameTimeTextBox";
             averageGameTimeTextBox.ReadOnly = true;
             averageGameTimeTextBox.Size = new Size(100, 22);
             averageGameTimeTextBox.TabIndex = 17;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("AniMe Matrix - MB_EN", 9F);
+            label9.Location = new Point(12, 20);
+            label9.Name = "label9";
+            label9.Size = new Size(75, 15);
+            label9.TabIndex = 18;
+            label9.Text = "Filters:";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("AniMe Matrix - MB_EN", 9F);
+            label10.Location = new Point(12, 78);
+            label10.Name = "label10";
+            label10.Size = new Size(103, 15);
+            label10.TabIndex = 19;
+            label10.Text = "Statistics:";
+            // 
             // StatisticsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(975, 635);
+            ClientSize = new Size(1206, 635);
+            Controls.Add(label10);
+            Controls.Add(label9);
             Controls.Add(averageGameTimeTextBox);
             Controls.Add(averageClicksTextBox);
             Controls.Add(winPercentageTextBox);
@@ -274,8 +298,12 @@
             Controls.Add(difficultyLevelComboBox);
             Controls.Add(applyFiltersButton);
             Controls.Add(GamesHistoryGridView);
+            MaximizeBox = false;
+            MaximumSize = new Size(1222, 674);
+            MinimumSize = new Size(1222, 674);
             Name = "StatisticsForm";
-            Text = "StatisticForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Statistics";
             ((System.ComponentModel.ISupportInitialize)GamesHistoryGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -301,5 +329,7 @@
         private TextBox winPercentageTextBox;
         private TextBox averageClicksTextBox;
         private TextBox averageGameTimeTextBox;
+        private Label label9;
+        private Label label10;
     }
 }

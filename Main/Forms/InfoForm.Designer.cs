@@ -49,7 +49,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(listBox1);
+            MaximizeBox = false;
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "InfoForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "InfoForm";
             ResumeLayout(false);
         }
