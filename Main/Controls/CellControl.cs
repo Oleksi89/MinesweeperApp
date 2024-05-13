@@ -42,6 +42,7 @@ namespace Main
 
         private void CellControl_Click(object sender, EventArgs e)
         {
+            if (Game.Instance.GameInProgress == false && Game.Instance.ClicksMade!=0) return;
             Cell.Click();
             
             UpdateAppearance();
@@ -50,6 +51,7 @@ namespace Main
 
         private void CellControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (Game.Instance.GameInProgress == false) return;
             if (e.Button == MouseButtons.Right)
             {
                 Cell.RightClick();

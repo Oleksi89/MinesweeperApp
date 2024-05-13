@@ -58,7 +58,7 @@ namespace Main
                 MessageBox.Show("You Lost!");
             }
 
-            if (message == "game started")
+            if (message == "game prepared")
             {
                 if (boardControl != null)
                 {
@@ -78,7 +78,7 @@ namespace Main
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
-            game.StartGame();
+            game.PrepareGame();
         }
 
 

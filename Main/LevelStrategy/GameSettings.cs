@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
+using Main.Properties;
 
 namespace Main
 {
@@ -40,6 +41,14 @@ namespace Main
         {
             DifficultyLevelStrategy = difficultyLevelStrategy;
             DifficultyLevel = difficultyLevelStrategy.GetType().Name.Replace("DifficultyLevelStrategy", "");
+        }
+
+        public void ClearSettings()
+        {
+            FirstClickIsSafe = false;
+            ClickNumberOpensAdjacentCells = false;
+            ClickOnMineStartsDefuseCountdown = false;
+            AllMinesFlaggedOpensRemainingCells = false;
         }
     }
 

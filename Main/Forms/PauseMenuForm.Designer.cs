@@ -28,12 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "PauseMenuForm";
+            statisticsButton = new Button();
+            pauseButton = new Button();
+            settingsButton = new Button();
+            SuspendLayout();
+            // 
+            // statisticsButton
+            // 
+            statisticsButton.Location = new Point(338, 168);
+            statisticsButton.Name = "statisticsButton";
+            statisticsButton.Size = new Size(107, 23);
+            statisticsButton.TabIndex = 13;
+            statisticsButton.Text = "statisticsButton";
+            statisticsButton.UseVisualStyleBackColor = true;
+            // 
+            // pauseButton
+            // 
+            pauseButton.Location = new Point(464, 166);
+            pauseButton.Name = "pauseButton";
+            pauseButton.Size = new Size(107, 23);
+            pauseButton.TabIndex = 12;
+            pauseButton.Text = "pauseButton";
+            pauseButton.UseVisualStyleBackColor = true;
+            // 
+            // settingsButton
+            // 
+            settingsButton.Location = new Point(215, 168);
+            settingsButton.Name = "settingsButton";
+            settingsButton.Size = new Size(107, 23);
+            settingsButton.TabIndex = 11;
+            settingsButton.Text = "settingsButton";
+            settingsButton.UseVisualStyleBackColor = true;
+            // 
+            // PauseMenuForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(statisticsButton);
+            Controls.Add(pauseButton);
+            Controls.Add(settingsButton);
+            Name = "PauseMenuForm";
+            Text = "PauseMenuForm";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button statisticsButton;
+        private Button pauseButton;
+        private Button settingsButton;
     }
 }

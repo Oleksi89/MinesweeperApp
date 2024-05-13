@@ -30,7 +30,6 @@ namespace Main
         private ISimilarGamesStatistic _statisticCalculator;
         public Board Board { get { return _board; }}
         public bool GameInProgress { get { return gameInProgress; } }
-        public bool FirstClickMade = false;
         public int ClicksMade = 0;
         public GameSettings Settings { get; set; }
         public readonly string settingsPath = "settings.dat";
@@ -109,8 +108,7 @@ namespace Main
             return _statisticCalculator.Get(historyEntry, gameHistoryPath);
         }
 
-
-        public void StartGame()
+        public void PrepareGame()
         {
             ClicksMade = 0;
             gameResult = "none";
@@ -122,17 +120,32 @@ namespace Main
             }
             _board = new Board(Settings.DifficultyLevelStrategy.GetDifficultyLevel().Width, Settings.DifficultyLevelStrategy.GetDifficultyLevel().Height);
             _board.GenerateBoard(Settings.DifficultyLevelStrategy);
+            NotifyObservers("game prepared");
+            
+        }
+
+        public void StartGame()
+        {
+            
             NotifyObservers("game started");
             gameInProgress = true;
 
         }
 
+        public void PauseGame()
+        {
+            gameInProgress = false;
+            NotifyObservers("game paused");
+        }
+        public void ResumeGame()
+        {
+            gameInProgress = true;
+            NotifyObservers("game resumed");
+        }
+
         public void ClearSettings()
         {
-            Settings.FirstClickIsSafe = false;
-            Settings.ClickNumberOpensAdjacentCells = false;
-            Settings.ClickOnMineStartsDefuseCountdown = false;
-            Settings.AllMinesFlaggedOpensRemainingCells = false;
+            Settings.ClearSettings();
         }
 
         public void GameLost()

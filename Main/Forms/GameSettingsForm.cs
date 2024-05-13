@@ -96,7 +96,7 @@ namespace Main
 
 
             game.Settings = new GameSettings(difficultyLevelStrategy);
-            game.StartGame();
+            game.PrepareGame();
             this.Close();
         }
     }
