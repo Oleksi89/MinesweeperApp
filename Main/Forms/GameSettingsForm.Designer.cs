@@ -36,95 +36,127 @@
             safeZoneCheckBox = new CheckBox();
             defuseCheckBox = new CheckBox();
             openRemainingCheckBox = new CheckBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // easyRadioButton
             // 
             easyRadioButton.AutoSize = true;
             easyRadioButton.Checked = true;
-            easyRadioButton.Location = new Point(244, 71);
+            easyRadioButton.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            easyRadioButton.Location = new Point(229, 60);
             easyRadioButton.Name = "easyRadioButton";
-            easyRadioButton.Size = new Size(114, 19);
+            easyRadioButton.Size = new Size(80, 22);
             easyRadioButton.TabIndex = 0;
             easyRadioButton.TabStop = true;
-            easyRadioButton.Text = "easyRadioButton";
+            easyRadioButton.Text = "easy";
             easyRadioButton.UseVisualStyleBackColor = true;
             // 
             // mediumRadioButton
             // 
             mediumRadioButton.AutoSize = true;
-            mediumRadioButton.Location = new Point(244, 96);
+            mediumRadioButton.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            mediumRadioButton.Location = new Point(229, 85);
             mediumRadioButton.Name = "mediumRadioButton";
-            mediumRadioButton.Size = new Size(136, 19);
+            mediumRadioButton.Size = new Size(99, 22);
             mediumRadioButton.TabIndex = 1;
-            mediumRadioButton.Text = "mediumRadioButton";
+            mediumRadioButton.Text = "medium";
             mediumRadioButton.UseVisualStyleBackColor = true;
             // 
             // hardRadioButton
             // 
             hardRadioButton.AutoSize = true;
-            hardRadioButton.Location = new Point(244, 121);
+            hardRadioButton.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            hardRadioButton.Location = new Point(229, 110);
             hardRadioButton.Name = "hardRadioButton";
-            hardRadioButton.Size = new Size(115, 19);
+            hardRadioButton.Size = new Size(80, 22);
             hardRadioButton.TabIndex = 2;
-            hardRadioButton.Text = "hardRadioButton";
+            hardRadioButton.Text = "hard";
             hardRadioButton.UseVisualStyleBackColor = true;
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(296, 315);
+            saveButton.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            saveButton.Location = new Point(255, 293);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(75, 23);
+            saveButton.Size = new Size(103, 27);
             saveButton.TabIndex = 3;
-            saveButton.Text = "saveButton";
+            saveButton.Text = "Apply";
             saveButton.UseVisualStyleBackColor = true;
             saveButton.Click += saveButton_Click;
             // 
             // safeStartCheckBox
             // 
             safeStartCheckBox.AutoSize = true;
-            safeStartCheckBox.Location = new Point(244, 161);
+            safeStartCheckBox.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            safeStartCheckBox.Location = new Point(229, 150);
             safeStartCheckBox.Name = "safeStartCheckBox";
-            safeStartCheckBox.Size = new Size(124, 19);
+            safeStartCheckBox.Size = new Size(159, 22);
             safeStartCheckBox.TabIndex = 4;
-            safeStartCheckBox.Text = "safeStartCheckBox";
+            safeStartCheckBox.Text = "Safe  Start";
             safeStartCheckBox.UseVisualStyleBackColor = true;
             // 
             // safeZoneCheckBox
             // 
             safeZoneCheckBox.AutoSize = true;
-            safeZoneCheckBox.Location = new Point(244, 186);
+            safeZoneCheckBox.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            safeZoneCheckBox.Location = new Point(229, 175);
             safeZoneCheckBox.Name = "safeZoneCheckBox";
-            safeZoneCheckBox.Size = new Size(127, 19);
+            safeZoneCheckBox.Size = new Size(138, 22);
             safeZoneCheckBox.TabIndex = 5;
-            safeZoneCheckBox.Text = "safeZoneCheckBox";
+            safeZoneCheckBox.Text = "Safe Zone";
             safeZoneCheckBox.UseVisualStyleBackColor = true;
             // 
             // defuseCheckBox
             // 
             defuseCheckBox.AutoSize = true;
-            defuseCheckBox.Location = new Point(244, 211);
+            defuseCheckBox.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            defuseCheckBox.Location = new Point(229, 200);
             defuseCheckBox.Name = "defuseCheckBox";
-            defuseCheckBox.Size = new Size(114, 19);
+            defuseCheckBox.Size = new Size(168, 22);
             defuseCheckBox.TabIndex = 6;
-            defuseCheckBox.Text = "defuseCheckBox";
+            defuseCheckBox.Text = "Neutralizing";
             defuseCheckBox.UseVisualStyleBackColor = true;
             // 
             // openRemainingCheckBox
             // 
             openRemainingCheckBox.AutoSize = true;
-            openRemainingCheckBox.Location = new Point(244, 236);
+            openRemainingCheckBox.Font = new Font("AniMe Matrix - MB_EN", 11.25F);
+            openRemainingCheckBox.Location = new Point(229, 225);
             openRemainingCheckBox.Name = "openRemainingCheckBox";
-            openRemainingCheckBox.Size = new Size(163, 19);
+            openRemainingCheckBox.Size = new Size(191, 22);
             openRemainingCheckBox.TabIndex = 7;
-            openRemainingCheckBox.Text = "openRemainingCheckBox";
+            openRemainingCheckBox.Text = "open  Remaining";
             openRemainingCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("AniMe Matrix - MB_EN", 9.749999F, FontStyle.Bold);
+            label1.Location = new Point(119, 38);
+            label1.Name = "label1";
+            label1.Size = new Size(119, 16);
+            label1.TabIndex = 8;
+            label1.Text = "Difficulty:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("AniMe Matrix - MB_EN", 9.749999F, FontStyle.Bold);
+            label2.Location = new Point(119, 131);
+            label2.Name = "label2";
+            label2.Size = new Size(104, 16);
+            label2.TabIndex = 9;
+            label2.Text = "Settings:";
             // 
             // GameSettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(604, 372);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(openRemainingCheckBox);
             Controls.Add(defuseCheckBox);
             Controls.Add(safeZoneCheckBox);
@@ -133,8 +165,12 @@
             Controls.Add(hardRadioButton);
             Controls.Add(mediumRadioButton);
             Controls.Add(easyRadioButton);
+            MaximizeBox = false;
+            MaximumSize = new Size(620, 411);
+            MinimumSize = new Size(620, 411);
             Name = "GameSettingsForm";
-            Text = "GameSettingsForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Settings";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -149,5 +185,7 @@
         private CheckBox safeZoneCheckBox;
         private CheckBox defuseCheckBox;
         private CheckBox openRemainingCheckBox;
+        private Label label1;
+        private Label label2;
     }
 }

@@ -22,7 +22,7 @@ namespace Main.GameHistory
         public GamesStatistic Get(GameHistoryEntry historyEntry, string filePath)
         {
             var gameHistory = JsonGameHistoryLoader.Load(filePath);
-            var similarGames = gameHistory.Where(game => game.DifficultyLevel == historyEntry.DifficultyLevel).ToList();
+            var similarGames = gameHistory.Where(game => game.DifficultyLevel == historyEntry.DifficultyLevel && game.Result == historyEntry.Result).ToList();
             if (similarGames.Any())
             {
                 return new GamesStatistic

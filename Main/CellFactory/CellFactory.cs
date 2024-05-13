@@ -38,25 +38,7 @@ namespace Main
             }
         }
         public abstract void Click();
-        public abstract void RightClick();
-    }
-    public class EmptyCell : Cell
-    {
-        public EmptyCell(int x, int y) : base(x, y) { }
-        public override void Click()
-        {
-            // Якщо клітинка пуста і не позначена прапорцем, відкриваємо її
-            if (!IsFlagged && !IsRevealed)
-            {
-                Game.Instance.ClicksMade++;
-                Open();
-
-            }
-        }
-
-
-
-        public override void RightClick()
+        public void RightClick()
         {
             // Перемикаємо стан прапорця
             if (!IsRevealed)
@@ -65,6 +47,28 @@ namespace Main
             }
             Game.Instance.NotifyObservers("flagged");
         }
+        public void IsFirstClick()
+        {
+            if (Game.Instance.ClicksMade == 0)
+            {
+                Game.Instance.StartGame();
+            }            
+        }
+    }
+    public class EmptyCell : Cell
+    {
+        public EmptyCell(int x, int y) : base(x, y) { }
+        public override void Click()
+        {
+            IsFirstClick();
+            // Якщо клітинка пуста і не позначена прапорцем, відкриваємо її
+            if (!IsFlagged && !IsRevealed)
+            {
+                Game.Instance.ClicksMade++;
+                Open();
+
+            }
+        }   
     }
 
     public class MineCell : Cell
@@ -72,6 +76,7 @@ namespace Main
         public MineCell(int x, int y) : base(x, y) { }
         public override void Click()
         {
+            IsFirstClick();
             // Якщо клітинка з міною і не позначена прапорцем, вона вибухає
             if (!IsFlagged && !IsRevealed)
             {
@@ -90,20 +95,8 @@ namespace Main
                         Game.Instance.GameLost();                        
                     
                     
-                }
-
-                
+                }          
             }
-        }
-
-        public override void RightClick()
-        {
-            // Перемикаємо стан прапорця
-            if (!IsRevealed)
-            {
-                IsFlagged = !IsFlagged;
-            }
-            Game.Instance.NotifyObservers("flagged");
         }
     }
 
@@ -118,13 +111,14 @@ namespace Main
 
         public override void Click()
         {
-            
+            IsFirstClick();
             // Якщо клітинка з числом і не позначена прапорцем, відкриваємо її
             if (!IsFlagged)
             {
                 if (Game.Instance.Settings.ClickNumberOpensAdjacentCells && IsRevealed)
                 {
                     Game.Instance.OpenNumberAdjacentCells(X, Y);
+                    Game.Instance.ClicksMade++;
                 }
                 else if (Game.Instance.Settings.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
                 {
@@ -139,18 +133,6 @@ namespace Main
 
                 }               
             }           
-        }
-
-
-        public override void RightClick()
-        {
-            // Перемикаємо стан прапорця
-            if (!IsRevealed)
-            {
-                IsFlagged = !IsFlagged;
-            }
-            
-            Game.Instance.NotifyObservers("flagged");
         }
     }
 

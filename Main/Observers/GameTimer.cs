@@ -19,7 +19,7 @@ namespace Main
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 100; // 0.1 second
             timer.Tick += Timer_Tick;
-            timerLabel.Text = "0";
+            timerLabel.Text = "000";
             TimeElapsed = 0;
         }
 
@@ -32,20 +32,25 @@ namespace Main
 
         public void Update(string message)
         {
-            if (message != "game started" && message != "game ended")
-                return;
-
-            if (message == "game started")
+            switch (message)
             {
-                timer.Stop();
-                TimeElapsed = 0;
-                timer.Start();
+                case "game prepared":
+                    timer.Stop();
+                    TimeElapsed = 0;
+                    timerLabel.Text = "000";
+                    break;
+                case "game started":
+                    timer.Start();
+                    break;
+                case "game ended":
+                case "game paused":
+                    timer.Stop();
+                    break;
+                case "game resumed":
+                    timer.Start();
+                    break;
             }
-            else if (message == "game ended")
-            {
-                timer.Stop();
 
-            }
         }
     }
 

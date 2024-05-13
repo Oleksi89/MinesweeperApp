@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
             startGameButton = new Button();
-            settingsButton = new Button();
             pauseButton = new Button();
             mineCounterLabel = new Label();
             timerLabel = new Label();
-            statisticsButton = new Button();
             BoardPanel = new Panel();
             SuspendLayout();
             // 
@@ -50,58 +48,42 @@
             startGameButton.UseVisualStyleBackColor = true;
             startGameButton.Click += startGameButton_Click;
             // 
-            // settingsButton
-            // 
-            settingsButton.Location = new Point(24, 61);
-            settingsButton.Name = "settingsButton";
-            settingsButton.Size = new Size(107, 23);
-            settingsButton.TabIndex = 4;
-            settingsButton.Text = "settingsButton";
-            settingsButton.UseVisualStyleBackColor = true;
-            settingsButton.Click += settingsButton_Click;
-            // 
             // pauseButton
             // 
-            pauseButton.Location = new Point(273, 59);
+            pauseButton.BackColor = Color.Transparent;
+            pauseButton.BackgroundImage = Properties.Resources.MenuImage;
+            pauseButton.BackgroundImageLayout = ImageLayout.Zoom;
+            pauseButton.FlatAppearance.BorderSize = 0;
+            pauseButton.FlatStyle = FlatStyle.Flat;
+            pauseButton.Location = new Point(24, 27);
             pauseButton.Name = "pauseButton";
-            pauseButton.Size = new Size(107, 23);
+            pauseButton.Size = new Size(69, 66);
             pauseButton.TabIndex = 5;
-            pauseButton.Text = "pauseButton";
-            pauseButton.UseVisualStyleBackColor = true;
+            pauseButton.UseVisualStyleBackColor = false;
             pauseButton.Click += pauseButton_Click;
             // 
             // mineCounterLabel
             // 
             mineCounterLabel.AutoSize = true;
-            mineCounterLabel.Font = new Font("AniMe Matrix - MB_EN", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            mineCounterLabel.Font = new Font("AniMe Matrix - MB_EN", 27.7499962F);
             mineCounterLabel.Location = new Point(431, 43);
             mineCounterLabel.Name = "mineCounterLabel";
-            mineCounterLabel.Size = new Size(142, 39);
+            mineCounterLabel.Size = new Size(95, 45);
             mineCounterLabel.TabIndex = 6;
-            mineCounterLabel.Text = "mines";
+            mineCounterLabel.Text = "---";
             mineCounterLabel.TextChanged += mineCounterLabel_TextChanged;
             mineCounterLabel.Click += openRemainingCellsButton_Click;
             // 
             // timerLabel
             // 
             timerLabel.AutoSize = true;
-            timerLabel.Font = new Font("AniMe Matrix - MB_EN", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            timerLabel.Font = new Font("AniMe Matrix - MB_EN", 27.7499962F);
             timerLabel.Location = new Point(706, 43);
             timerLabel.Name = "timerLabel";
-            timerLabel.Size = new Size(147, 39);
+            timerLabel.Size = new Size(171, 45);
             timerLabel.TabIndex = 7;
             timerLabel.Text = "timer";
             timerLabel.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // statisticsButton
-            // 
-            statisticsButton.Location = new Point(147, 61);
-            statisticsButton.Name = "statisticsButton";
-            statisticsButton.Size = new Size(107, 23);
-            statisticsButton.TabIndex = 10;
-            statisticsButton.Text = "statisticsButton";
-            statisticsButton.UseVisualStyleBackColor = true;
-            statisticsButton.Click += statisticsButton_Click;
             // 
             // BoardPanel
             // 
@@ -122,27 +104,25 @@
             AutoSize = true;
             ClientSize = new Size(1232, 643);
             Controls.Add(BoardPanel);
-            Controls.Add(statisticsButton);
             Controls.Add(timerLabel);
             Controls.Add(mineCounterLabel);
             Controls.Add(pauseButton);
-            Controls.Add(settingsButton);
             Controls.Add(startGameButton);
+            KeyPreview = true;
             MinimumSize = new Size(1248, 682);
             Name = "GameForm";
             Text = "Minesweeper";
             FormClosing += GameForm_FormClosing;
+            KeyDown += GameForm_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Button startGameButton;
-        private Button settingsButton;
         private Button pauseButton;
         private Label mineCounterLabel;
         private Label timerLabel;
-        private Button statisticsButton;
         private Panel BoardPanel;
     }
 }

@@ -208,19 +208,19 @@ namespace Main
         void ApplyStyleToGridView()
         {
             GamesHistoryGridView.Columns["DifficultyLevel"].HeaderText = "Difficulty Level";
-            GamesHistoryGridView.Columns["DifficultyLevel"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["DifficultyLevel"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["FirstClickIsSafe"].HeaderText = "Safe Start";
-            GamesHistoryGridView.Columns["FirstClickIsSafe"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["FirstClickIsSafe"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["ClickNumberOpensAdjacentCells"].HeaderText = "Safe Zone";
-            GamesHistoryGridView.Columns["ClickNumberOpensAdjacentCells"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["ClickNumberOpensAdjacentCells"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["ClickOnMineStartsDefuseCountdown"].HeaderText = "No Loose";
-            GamesHistoryGridView.Columns["ClickOnMineStartsDefuseCountdown"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["ClickOnMineStartsDefuseCountdown"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["AllMinesFlaggedOpensRemainingCells"].HeaderText = "Opens Remaining";
-            GamesHistoryGridView.Columns["AllMinesFlaggedOpensRemainingCells"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["AllMinesFlaggedOpensRemainingCells"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["PercentageOfCorrectlyOpenedCells"].HeaderText = "Correctly Opened Cells (%)";
             GamesHistoryGridView.Columns["PercentageOfCorrectlyOpenedCells"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -229,10 +229,10 @@ namespace Main
             GamesHistoryGridView.Columns["EndTime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             GamesHistoryGridView.Columns["Result"].HeaderText = "Result";
-            GamesHistoryGridView.Columns["Result"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["Result"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["ClicksMade"].HeaderText = "Clicks Made";
-            GamesHistoryGridView.Columns["ClicksMade"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            GamesHistoryGridView.Columns["ClicksMade"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             GamesHistoryGridView.Columns["GameTime"].HeaderText = "Game Time (s)";
             GamesHistoryGridView.Columns["GameTime"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

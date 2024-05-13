@@ -18,7 +18,7 @@ namespace Main
 
         public void Update(string message)
         {
-            if (message != "flagged")
+            if (message != "flagged" && message != "game prepared")
                 return;
 
             if (Game.Instance.GameInProgress == false && Game.Instance.Board != null)
@@ -34,7 +34,7 @@ namespace Main
             }
             else
             {
-                mineCounterLabel.Text = "0";
+                mineCounterLabel.Text = "000";
             }
         }
     }

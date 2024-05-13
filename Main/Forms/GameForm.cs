@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Main;
 using System.Text.Json;
+using Main.Controls;
 
 namespace Main
 {
@@ -24,7 +25,7 @@ namespace Main
 
 
         private GameWonControl gameWonControl;
-
+        private PauseControl pauseControl;
 
         public GameForm()
         {
@@ -36,10 +37,16 @@ namespace Main
             game.RegisterObserver(this);
 
             gameWonControl = new GameWonControl();
-
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
+
+            pauseControl = new PauseControl(game);
+            this.Controls.Add(pauseControl);
+            pauseControl.Dock = DockStyle.Fill;
+            pauseControl.Visible = false;
+
+            game.PrepareGame();
         }
 
         public void Update(string message)
@@ -58,7 +65,7 @@ namespace Main
                 MessageBox.Show("You Lost!");
             }
 
-            if (message == "game started")
+            if (message == "game prepared")
             {
                 if (boardControl != null)
                 {
@@ -78,7 +85,7 @@ namespace Main
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
-            game.StartGame();
+            game.PrepareGame();
         }
 
 
@@ -91,7 +98,9 @@ namespace Main
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            new PauseMenuForm(game).ShowDialog();
+            game.PauseGame();
+            pauseControl.Visible = true;
+            pauseControl.BringToFront();
         }
 
         private void GameForm_Load(object sender, EventArgs e)
@@ -127,6 +136,24 @@ namespace Main
             if (int.TryParse(mineCounterLabel.Text, out int number) && number == 0)
                 mineCounterLabel.ForeColor = Color.Cyan;
             else mineCounterLabel.ForeColor = Color.Black;
+        }
+
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (!pauseControl.Visible)
+                {
+                    game.PauseGame();
+                    pauseControl.Visible = true;
+                    pauseControl.BringToFront();
+                }
+                else if (pauseControl.Visible)
+                {
+                    game.ResumeGame();
+                    pauseControl.Visible = false;
+                }
+            }
         }
     }
 
