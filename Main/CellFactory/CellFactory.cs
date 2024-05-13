@@ -28,13 +28,13 @@ namespace Main
         {
             IsRevealed = true;
             RaiseOnClick();
-            if (Game.Instance.Board.IsGameWon())
-                Game.Instance.GameWon();
+            
+            Game.Instance.IsGameWon();
             
 
             if (!IsFlagged && this is EmptyCell)
             {
-                Game.Instance.Board.OpenAdjacentEmptyCells(this);
+                Game.Instance.Board.OpenEmptyAdjacentCells(this);
             }
         }
         public abstract void Click();
@@ -45,7 +45,8 @@ namespace Main
             {
                 IsFlagged = !IsFlagged;
             }
-            Game.Instance.NotifyObservers("flagged");
+            Game.Instance.CellFlagged();
+            RaiseOnClick();
         }
         public void IsFirstClick()
         {
@@ -61,10 +62,10 @@ namespace Main
         public override void Click()
         {
             IsFirstClick();
-            // Якщо клітинка пуста і не позначена прапорцем, відкриваємо її
+ 
             if (!IsFlagged && !IsRevealed)
             {
-                Game.Instance.ClicksMade++;
+                Game.Instance.IncrementClicksMade();
                 Open();
 
             }
@@ -77,7 +78,7 @@ namespace Main
         public override void Click()
         {
             IsFirstClick();
-            // Якщо клітинка з міною і не позначена прапорцем, вона вибухає
+
             if (!IsFlagged && !IsRevealed)
             {
                 
@@ -89,9 +90,9 @@ namespace Main
                 }
                 else
                 {
-                    Game.Instance.ClicksMade++;
+                    Game.Instance.IncrementClicksMade();
                     Open();
-                     if (!Game.Instance.Settings.ClickOnMineStartsDefuseCountdown == true)                                            
+                     if (!Game.Instance.Settings.ClickOnMineDefuses == true)                                            
                         Game.Instance.GameLost();                        
                     
                     
@@ -112,13 +113,13 @@ namespace Main
         public override void Click()
         {
             IsFirstClick();
-            // Якщо клітинка з числом і не позначена прапорцем, відкриваємо її
+
             if (!IsFlagged)
             {
                 if (Game.Instance.Settings.ClickNumberOpensAdjacentCells && IsRevealed)
                 {
                     Game.Instance.OpenNumberAdjacentCells(X, Y);
-                    Game.Instance.ClicksMade++;
+                    Game.Instance.IncrementClicksMade();
                 }
                 else if (Game.Instance.Settings.FirstClickIsSafe && Game.Instance.ClicksMade == 0)
                 {
@@ -129,7 +130,7 @@ namespace Main
                 else
                 {
                     Open();
-                    Game.Instance.ClicksMade++;
+                    Game.Instance.IncrementClicksMade();
 
                 }               
             }           

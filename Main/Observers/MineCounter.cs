@@ -9,9 +9,9 @@ namespace Main
     [Serializable]
     public class MineCounter : IGameObserver
     {
-        private Label mineCounterLabel;
+        private Control mineCounterLabel;
 
-        public MineCounter(Label mineCounterLabel)
+        public MineCounter(Control mineCounterLabel)
         {
             this.mineCounterLabel = mineCounterLabel;
         }
@@ -21,12 +21,12 @@ namespace Main
             if (message != "flagged" && message != "game prepared")
                 return;
 
-            if (Game.Instance.GameInProgress == false && Game.Instance.Board != null)
+            if (!Game.Instance.GameInProgress && Game.Instance.Board != null)
             {
                 int totalMines = Game.Instance.Board.TotalMines;
                 mineCounterLabel.Text = totalMines.ToString().PadLeft(3, '0');
             }
-            else if (Game.Instance.GameInProgress == true && Game.Instance.Board != null)
+            else if (Game.Instance.GameInProgress && Game.Instance.Board != null)
             {
                 int flaggedCells = Game.Instance.Board.GetCells().Count(c => c.IsFlagged);
                 int totalMines = Game.Instance.Board.TotalMines;

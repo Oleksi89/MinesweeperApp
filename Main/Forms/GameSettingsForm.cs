@@ -24,10 +24,10 @@ namespace Main
 
         private void LoadSettings()
         {
-            // Зчитуємо налаштування з game
+            // Load settings from game
             var settings = game.Settings;
 
-            // Встановлюємо радіобатони відповідно до рівня складності
+            // Set radio buttons according to difficulty level
             if (settings.DifficultyLevelStrategy is EasyDifficultyLevelStrategy)
             {
                 easyRadioButton.Checked = true;
@@ -41,12 +41,13 @@ namespace Main
                 hardRadioButton.Checked = true;
             }
 
-            // Встановлюємо чекбокси відповідно до налаштувань гри
+            // Set checkboxes according to game settings
             safeStartCheckBox.Checked = game.GameSettings.Any(gs => gs is SafeStart);
             safeZoneCheckBox.Checked = game.GameSettings.Any(gs => gs is SafeZone);
             defuseCheckBox.Checked = game.GameSettings.Any(gs => gs is Defuse);
             openRemainingCheckBox.Checked = game.GameSettings.Any(gs => gs is OpenRemaining);
         }
+
 
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -97,7 +98,7 @@ namespace Main
 
             game.Settings = new GameSettings(difficultyLevelStrategy);
             game.PrepareGame();
-            this.Close();
+            // this.Close();
         }
     }
 

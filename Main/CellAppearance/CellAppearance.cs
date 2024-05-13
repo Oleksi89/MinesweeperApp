@@ -23,25 +23,25 @@ namespace Main
                 switch (type)
                 {
                     case "flag":
-                        appearance.Image = Image.FromFile("flag.gif");
+                        appearance.Image = Properties.Resources.flag;
                         break;
                     case "mine":
-                        appearance.Image = Image.FromFile("mine.gif");
+                        appearance.Image = Properties.Resources.mine;
                         break;
                     case "crossedMine":
-                        appearance.Image = Image.FromFile("crossedMine.gif");
+                        appearance.Image = Properties.Resources.crossedMine;
                         break;
                     case "empty":
-                        appearance.Image = Image.FromFile("empty.gif");
+                        appearance.Image = Properties.Resources.empty;
                         break;
                     case "closed":
-                        appearance.Image = Image.FromFile("closed.gif");
+                        appearance.Image = Properties.Resources.closed;
                         break;
                     default:
                         if (type.StartsWith("number"))
                         {
                             string number = type;
-                            appearance.Image = Image.FromFile($"{number}.gif");
+                            appearance.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"{number}");
                         }
                         break;
                 }

@@ -18,13 +18,10 @@ namespace Main
         {
             get
             {
-                // Підраховуємо кількість мін на дошці
                 return cells.Cast<Cell>().Count(c => c is MineCell);
             }
         }
 
-        // private static Board _instance;
-        // public static Board Instance => _instance ?? (_instance = new Board());
         public Board(int width, int height)
         {
             cells = new Cell[width, height];
@@ -224,28 +221,27 @@ namespace Main
         }
 
 
-        
-        public void OpenAdjacentEmptyCells(Cell cell)
+
+        public void OpenEmptyAdjacentCells(Cell cell)
         {
-            // Отримуємо координати клітини
+            // Get cell coordinates
             int x = cell.X;
             int y = cell.Y;
 
-            // Перевіряємо всі сусідні клітини
+            // Check all adjacent cells
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
                 {
                     int newX = x + i;
                     int newY = y + j;
-                    // Переконуємося, що нові координати знаходяться в межах дошки
+                    // Make sure the new coordinates are within the board
                     if (newX >= 0 && newX < Width && newY >= 0 && newY < Height)
                     {
                         Cell adjacentCell = cells[newX, newY];
-                        // Якщо сусідня клітинка пуста не відкрита не помічена, відкриваємо її
+                        // If the adjacent cell is not a mine, not open, not flagged, open it
                         if (adjacentCell is not MineCell && !adjacentCell.IsRevealed && !adjacentCell.IsFlagged)
                         {
-                            //Game.Instance.Board
                             adjacentCell.Open();
                         }
                     }
@@ -255,20 +251,20 @@ namespace Main
 
         public void OpenNumberAdjacentCells(int x, int y)
         {
-            // Перевіряємо, чи клітина є NumberCell
+            // Check if the cell is a NumberCell
             if (cells[x, y] is NumberCell numberCell)
             {
-                // Отримуємо список сусідніх клітин
+                // Get a list of adjacent cells
                 List<Cell> adjacentCells = GetAdjacentCells(x, y);
 
-                // Перевіряємо, чи кількість сусідніх клітин, позначених прапорцем, дорівнює значенню NumberCell
+                // Check if the number of adjacent cells flagged equals the value of NumberCell
                 if (adjacentCells.Count(cell => cell.IsFlagged) == numberCell.AdjacentMines)
                 {
-                    // Якщо це так, відкриваємо всі сусідні клітини
+                    // If so, open all adjacent cells
                     foreach (var cell in adjacentCells)
                     {
-                        if(!cell.IsRevealed && !cell.IsFlagged)
-                        cell.Click();
+                        if (!cell.IsRevealed && !cell.IsFlagged)
+                            cell.Click();
                     }
                 }
             }
@@ -278,12 +274,12 @@ namespace Main
         {
             var adjacentCells = new List<Cell>();
 
-            // Перевіряємо всі сусідні клітини
+            // Check all adjacent cells
             for (int i = Math.Max(0, x - 1); i <= Math.Min(cells.GetLength(0) - 1, x + 1); i++)
             {
                 for (int j = Math.Max(0, y - 1); j <= Math.Min(cells.GetLength(1) - 1, y + 1); j++)
                 {
-                    // Пропускаємо саму клітину
+                    // Skip the cell itself
                     if (i == x && j == y)
                         continue;
 
@@ -314,21 +310,18 @@ namespace Main
 
         public void OpenRemainingCells()
         {
-            // Перевіряємо всі клітини на дошці
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
                     Cell cell = cells[i, j];
-                    // Якщо клітинка не відкрита , відкриваємо її
                     if (!cell.IsRevealed && !(cell.IsFlagged && cell is MineCell))
                     {
                         cell.Open();
                     }
                 }
             }
-            if (Game.Instance.Board.IsGameLost() && !Game.Instance.Settings.ClickOnMineStartsDefuseCountdown == true)
-                Game.Instance.GameLost();
+                Game.Instance.IsGameLost();
         }
 
     }

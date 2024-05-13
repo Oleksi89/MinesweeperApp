@@ -66,7 +66,7 @@
             // 
             mineCounterLabel.AutoSize = true;
             mineCounterLabel.Font = new Font("AniMe Matrix - MB_EN", 27.7499962F);
-            mineCounterLabel.Location = new Point(431, 43);
+            mineCounterLabel.Location = new Point(415, 43);
             mineCounterLabel.Name = "mineCounterLabel";
             mineCounterLabel.Size = new Size(95, 45);
             mineCounterLabel.TabIndex = 6;
@@ -90,10 +90,9 @@
             BoardPanel.Anchor = AnchorStyles.Top;
             BoardPanel.AutoSize = true;
             BoardPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BoardPanel.BorderStyle = BorderStyle.FixedSingle;
             BoardPanel.Location = new Point(622, 117);
             BoardPanel.Name = "BoardPanel";
-            BoardPanel.Size = new Size(2, 2);
+            BoardPanel.Size = new Size(0, 0);
             BoardPanel.TabIndex = 11;
             BoardPanel.Resize += BoardPanel_Resize;
             // 

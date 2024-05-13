@@ -1,13 +1,4 @@
-﻿using Main;
-using Main.Properties;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Main.GameHistory;
 
 namespace Main
@@ -21,7 +12,6 @@ namespace Main
 
         private Board _board;
         private GameTimer gameTimer;
-        public GameTimer GameTimer { get { return gameTimer; } }
         private MineCounter mineCounter;
 
         private bool gameInProgress;
@@ -30,14 +20,14 @@ namespace Main
         private ISimilarGamesStatistic _statisticCalculator;
         public Board Board { get { return _board; } }
         public bool GameInProgress { get { return gameInProgress; } }
-        public int ClicksMade = 0;
+        public int ClicksMade { get; private set; }
         public GameSettings Settings { get; set; }
         public readonly string settingsPath = "settings.dat";
-        public readonly string gameHistoryPath = "gameHistory.dat";
+        public readonly string gamesHistoryPath = "gamesHistory.dat";
 
         private Game() { }
 
-        public void Initialize(Label timerLabel, Label mineCounterLabel)
+        public void Initialize(Control timerLabel, Control mineCounterLabel)
         {
             gameTimer = new GameTimer(timerLabel);
             RegisterObserver(gameTimer);
@@ -77,7 +67,7 @@ namespace Main
             observers.Remove(observer);
         }
 
-        public void NotifyObservers(string message)
+        private void NotifyObservers(string message)
         {
             foreach (IGameObserver observer in observers)
             {
@@ -92,7 +82,7 @@ namespace Main
                 DifficultyLevel = this.Settings.DifficultyLevel,
                 FirstClickIsSafe = this.Settings.FirstClickIsSafe,
                 ClickNumberOpensAdjacentCells = this.Settings.ClickNumberOpensAdjacentCells,
-                ClickOnMineStartsDefuseCountdown = this.Settings.ClickOnMineStartsDefuseCountdown,
+                ClickOnMineStartsDefuseCountdown = this.Settings.ClickOnMineDefuses,
                 AllMinesFlaggedOpensRemainingCells = this.Settings.AllMinesFlaggedOpensRemainingCells,
                 PercentageOfCorrectlyOpenedCells = (double)Board.GetCorrectlyOpenedCellsPercentage(),
                 EndTime = DateTime.Now,
@@ -105,13 +95,14 @@ namespace Main
         }
         public GamesStatistic GetGameStatistics(GameHistoryEntry historyEntry)
         {
-            return _statisticCalculator.Get(historyEntry, gameHistoryPath);
+            return _statisticCalculator.Get(historyEntry, gamesHistoryPath);
         }
 
         public void PrepareGame()
         {
             ClicksMade = 0;
             gameResult = "none";
+            gameInProgress = false;
             ClearSettings();
 
             foreach (var gameSetting in gameSettings)
@@ -121,20 +112,17 @@ namespace Main
             _board = new Board(Settings.DifficultyLevelStrategy.GetDifficultyLevel().Width, Settings.DifficultyLevelStrategy.GetDifficultyLevel().Height);
             _board.GenerateBoard(Settings.DifficultyLevelStrategy);
             NotifyObservers("game prepared");
-
         }
 
         public void StartGame()
         {
-
             NotifyObservers("game started");
             gameInProgress = true;
-
         }
 
         public void PauseGame()
         {
-            if (gameInProgress && gameResult=="none")
+            if (gameInProgress && gameResult == "none")
             {
                 gameInProgress = false;
                 NotifyObservers("game paused");
@@ -142,7 +130,7 @@ namespace Main
         }
         public void ResumeGame()
         {
-            if (!gameInProgress && gameResult == "none" && ClicksMade!=0)
+            if (!gameInProgress && gameResult == "none" && ClicksMade != 0)
             {
                 gameInProgress = true;
                 NotifyObservers("game resumed");
@@ -164,6 +152,7 @@ namespace Main
             NotifyObservers("game lost");
 
         }
+
         public void GameWon()
         {
 
@@ -172,17 +161,15 @@ namespace Main
             NotifyObservers("game won");
 
         }
+
         public void EndGame()
         {
 
             gameInProgress = false;
-            //_board = null;
             NotifyObservers("game ended");
             var entry = GetGameData();
-            _gameHistorySaver.Save(entry, gameHistoryPath);
+            _gameHistorySaver.Save(entry, gamesHistoryPath);
         }
-
-
 
         public void SaveSettings()
         {
@@ -221,7 +208,7 @@ namespace Main
                     AddGameSetting(new SafeZone());
                 }
 
-                if (settings.ClickOnMineStartsDefuseCountdown)
+                if (settings.ClickOnMineDefuses)
                 {
                     AddGameSetting(new Defuse());
                 }
@@ -235,18 +222,38 @@ namespace Main
             }
         }
 
+        public void IsGameWon()
+        {
+            if (Board.IsGameWon())
+                GameWon();
+        }
+
+        public void IsGameLost()
+        {
+            if (Board.IsGameLost() && !Settings.ClickOnMineDefuses)
+                GameLost();
+        }
+
+        public void IncrementClicksMade()
+        {
+            ClicksMade++;
+        }
 
         public void OpenNumberAdjacentCells(int x, int y)
         {
             Board.OpenNumberAdjacentCells(x, y);
         }
+
         public void GenerateNewBoardAndClick(int x, int y)
         {
             Board.ReGenerateBoard(Settings.DifficultyLevelStrategy, x, y);
             NotifyObservers("regenerate board");
             Board.GetCell(x, y).Click();
         }
+
+        public void CellFlagged()
+        {
+            NotifyObservers("flagged");
+        }
     }
-
-
 }

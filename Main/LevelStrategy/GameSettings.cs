@@ -18,7 +18,7 @@ namespace Main
 
         public bool FirstClickIsSafe { get; set; }
         public bool ClickNumberOpensAdjacentCells { get; set; }
-        public bool ClickOnMineStartsDefuseCountdown { get; set; }
+        public bool ClickOnMineDefuses { get; set; }
         public bool AllMinesFlaggedOpensRemainingCells { get; set; }
 
         public GameSettings()
@@ -47,7 +47,7 @@ namespace Main
         {
             FirstClickIsSafe = false;
             ClickNumberOpensAdjacentCells = false;
-            ClickOnMineStartsDefuseCountdown = false;
+            ClickOnMineDefuses = false;
             AllMinesFlaggedOpensRemainingCells = false;
         }
     }

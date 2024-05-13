@@ -26,14 +26,9 @@ namespace Main
             Update();
         }
 
-        private void StatisticsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private new void Update()
         {
-            var gameHistory = JsonGameHistoryLoader.Load(_game.gameHistoryPath);
+            var gameHistory = JsonGameHistoryLoader.Load(_game.gamesHistoryPath);
             var dataTable = new DataTable();
 
             dataTable.Columns.Add("DifficultyLevel", typeof(string));
@@ -68,44 +63,46 @@ namespace Main
             ApplyStyleToGridView();
             DisplayStatistics();
         }
-        
+
 
         private void GamesHistoryGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (GamesHistoryGridView.Columns[e.ColumnIndex].Name == "Result")
+            switch (GamesHistoryGridView.Columns[e.ColumnIndex].Name)
             {
-                if ((string)e.Value == "Won")
-                {
-                    GamesHistoryGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
-                }
-                else if ((string)e.Value == "Lost")
-                {
-                    GamesHistoryGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
-                }
+                case "Result":
+                    switch ((string)e.Value)
+                    {
+                        case "Won":
+                            GamesHistoryGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                            break;
+                        case "Lost":
+                            GamesHistoryGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+                            break;
+                    }
+                    break;
+                case "EndTime":
+                    if (e.Value != null)
+                    {
+                        DateTime dateTime = (DateTime)e.Value;
+                        e.Value = dateTime.ToString("dd/MM/yyyy HH:mm:ss");
+                    }
+                    break;
+                case "DifficultyLevel":
+                    switch ((string)e.Value)
+                    {
+                        case "Easy":
+                            e.CellStyle.BackColor = Color.LightBlue;
+                            break;
+                        case "Medium":
+                            e.CellStyle.BackColor = Color.LightYellow;
+                            break;
+                        case "Hard":
+                            e.CellStyle.BackColor = Color.Purple;
+                            break;
+                    }
+                    break;
             }
-            else if (GamesHistoryGridView.Columns[e.ColumnIndex].Name == "EndTime")
-            {
-                if (e.Value != null)
-                {
-                    DateTime dateTime = (DateTime)e.Value;
-                    e.Value = dateTime.ToString("dd/MM/yyyy HH:mm:ss");
-                }
-            }
-            else if (GamesHistoryGridView.Columns[e.ColumnIndex].Name == "DifficultyLevel")
-            {
-                switch ((string)e.Value)
-                {
-                    case "Easy":
-                        e.CellStyle.BackColor = Color.LightBlue;
-                        break;
-                    case "Medium":
-                        e.CellStyle.BackColor = Color.LightYellow;
-                        break;
-                    case "Hard":
-                        e.CellStyle.BackColor = Color.Purple;
-                        break;
-                }
-            }
+
         }
 
         private void applyFiltersButton_Click(object sender, EventArgs e)

@@ -22,8 +22,6 @@ namespace Main
     {
         private Game game;
         private BoardControl boardControl;
-
-
         private GameWonControl gameWonControl;
         private PauseControl pauseControl;
 
@@ -51,36 +49,30 @@ namespace Main
 
         public void Update(string message)
         {
-            if (message == "game won")
+            switch (message)
             {
-
-                var gameData = game.GetGameData();
-                var statistics = game.GetGameStatistics(gameData);
-                gameWonControl.UpdateGameWonInfo(gameData, statistics);
-                gameWonControl.Visible = true;
-                gameWonControl.BringToFront();
+                case "game won":
+                    var gameData = game.GetGameData();
+                    var statistics = game.GetGameStatistics(gameData);
+                    gameWonControl.UpdateGameWonInfo(gameData, statistics);
+                    gameWonControl.Visible = true;
+                    gameWonControl.BringToFront();
+                    break;
+                case "game lost":
+                    MessageBox.Show("You Lost!");
+                    break;
+                case "game prepared":
+                    if (boardControl != null)
+                    {
+                        BoardPanel.Controls.Remove(boardControl);
+                    }
+                    boardControl = new BoardControl(game.Board);
+                    BoardPanel.Controls.Add(boardControl);
+                    break;
+                case "regenerate board":
+                    boardControl.UpdateBoard();
+                    break;
             }
-            if (message == "game lost")
-            {
-                MessageBox.Show("You Lost!");
-            }
-
-            if (message == "game prepared")
-            {
-                if (boardControl != null)
-                {
-                    BoardPanel.Controls.Remove(boardControl);
-                }
-                boardControl = new BoardControl(game.Board);
-                BoardPanel.Controls.Add(boardControl);
-            }
-            // playerInfoLabel.Text = $"{game.ClicksMade}";
-
-            if (message == "regenerate board" && Game.Instance.Settings.FirstClickIsSafe)
-            {
-                boardControl.UpdateBoard();
-            }
-
         }
 
         private void startGameButton_Click(object sender, EventArgs e)
@@ -88,24 +80,11 @@ namespace Main
             game.PrepareGame();
         }
 
-
-
-
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            new GameSettingsForm(game).ShowDialog();
-        }
-
         private void pauseButton_Click(object sender, EventArgs e)
         {
             game.PauseGame();
             pauseControl.Visible = true;
             pauseControl.BringToFront();
-        }
-
-        private void GameForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void openRemainingCellsButton_Click(object sender, EventArgs e)
@@ -119,11 +98,6 @@ namespace Main
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             game.SaveSettings();
-        }
-
-        private void statisticsButton_Click(object sender, EventArgs e)
-        {
-            new StatisticsForm(game).ShowDialog();
         }
 
         private void BoardPanel_Resize(object sender, EventArgs e)

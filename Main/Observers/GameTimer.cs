@@ -10,10 +10,10 @@ namespace Main
     public class GameTimer : IGameObserver
     {
         private System.Windows.Forms.Timer timer;
-        private Label timerLabel;
+        private Control timerLabel;
         public double TimeElapsed;
 
-        public GameTimer(Label timerLabel)
+        public GameTimer(Control timerLabel)
         {
             this.timerLabel = timerLabel;
             timer = new System.Windows.Forms.Timer();

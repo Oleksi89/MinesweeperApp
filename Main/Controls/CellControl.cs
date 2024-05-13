@@ -45,8 +45,6 @@ namespace Main
             if (Game.Instance.GameInProgress == false && Game.Instance.ClicksMade!=0) return;
             Cell.Click();
             
-            UpdateAppearance();
-            
         }
 
         private void CellControl_MouseUp(object sender, MouseEventArgs e)
@@ -55,7 +53,6 @@ namespace Main
             if (e.Button == MouseButtons.Right)
             {
                 Cell.RightClick();
-                UpdateAppearance();
             }
         }
 
@@ -63,50 +60,31 @@ namespace Main
         {
             if (Cell.IsRevealed)
             {
-                if (Cell is MineCell && Cell.IsFlagged)
+                switch (Cell)
                 {
-                    // this.Text = "F";
-                    this.Appearance = _factory.GetAppearance("flag");
-                    // this.BackColor = Color.Green;
-                }
-                else if (Cell is not MineCell && Cell.IsFlagged)
-                {
-                    // this.BackColor = Color.Purple;
-                    // this.Text = "X";
-                    this.Appearance = _factory.GetAppearance("crossedMine");
-
-                }
-                else if (Cell is MineCell)
-                {
-                    // this.BackColor = Color.Red;
-                    // this.Text = "M";
-                    this.Appearance = _factory.GetAppearance("mine");
-
-                }
-                else if (Cell is NumberCell)
-                {
-                    // this.BackColor = Color.Teal;
-
-                    if (((NumberCell)Cell).AdjacentMines > 6)
-                    {
+                    case MineCell _ when Cell.IsFlagged:
+                        this.Appearance = _factory.GetAppearance("flag");
+                        break;
+                    case not MineCell _ when Cell.IsFlagged:
+                        this.Appearance = _factory.GetAppearance("crossedMine");
+                        break;
+                    case MineCell _:
+                        this.Appearance = _factory.GetAppearance("mine");
+                        break;
+                    case NumberCell numberCell when numberCell.AdjacentMines > 6:
                         this.BackColor = Color.Teal;
-                        this.Text = ((NumberCell)Cell).AdjacentMines.ToString();
-                    }
-                    else
-                        this.Appearance = _factory.GetAppearance("number" + ((NumberCell)Cell).AdjacentMines.ToString());
-
-                }
-                else if (Cell is EmptyCell)
-                {
-                    // this.Text = "";
-                    // this.BackColor = Color.Teal;
-                    this.Appearance = _factory.GetAppearance("empty");
-
+                        this.Text = numberCell.AdjacentMines.ToString();
+                        break;
+                    case NumberCell numberCell:
+                        this.Appearance = _factory.GetAppearance("number" + numberCell.AdjacentMines);
+                        break;
+                    case EmptyCell _:
+                        this.Appearance = _factory.GetAppearance("empty");
+                        break;
                 }
             }
             else
             {
-                //this.Text = Cell.IsFlagged ? "F" : "";
                 this.Appearance = Cell.IsFlagged ? _factory.GetAppearance("flag") : _factory.GetAppearance("closed"); ;
             }
 

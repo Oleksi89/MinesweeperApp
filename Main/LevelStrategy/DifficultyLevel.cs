@@ -8,9 +8,9 @@ namespace Main
 {
     public class DifficultyLevel
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Mines { get; set; }
+        public int Width { get;}
+        public int Height { get;}
+        public int Mines { get;}
 
         public DifficultyLevel(int width, int height, int mines)
         {
