@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.GameHistory;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,14 +18,14 @@ namespace Main
             InitializeComponent();
         }
 
-        public void UpdateGameWonInfo(double playingTime, double bestBeginnerTime, int numberOfClicks)
+        public void UpdateGameWonInfo(GameHistoryEntry currentGame, GamesStatistic statistics)
         {
-            
             lblTitle.Text = "YOU WON!";
             lblSubtitle.Text = "Congratulations!";
-            lblPlayingTime.Text = $"Playing time: {Math.Round(playingTime, 1)}";
-            lblBestBeginnerTime.Text = $"Your best Beginner time: {Math.Round(bestBeginnerTime, 1)}";
-            lblNumberOfClicks.Text = $"Number of clicks: {numberOfClicks}";
+            lblPlayingTime.Text = $"Playing time: {Math.Round(currentGame.GameTime, 1)}";
+            lblStatisticsTime.Text = $"Your {currentGame.DifficultyLevel} Best time: {Math.Round(statistics.BestTime, 1)} Average: {Math.Round(statistics.AverageTime, 1)})";
+            lblNumberOfClicks.Text = $"Number of clicks: {currentGame.ClicksMade}";
+            lblStatisticsClicks.Text = $"Your {currentGame.DifficultyLevel} Best clicks result: {statistics.LeastClicks} (Average: {Math.Round(statistics.AverageClicks, 1)})";
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

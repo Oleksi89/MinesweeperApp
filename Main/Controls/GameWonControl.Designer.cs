@@ -31,15 +31,16 @@
             lblTitle = new Label();
             lblSubtitle = new Label();
             lblPlayingTime = new Label();
-            lblBestBeginnerTime = new Label();
+            lblStatisticsTime = new Label();
             lblNumberOfClicks = new Label();
             CloseButton = new Button();
+            lblStatisticsClicks = new Label();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(104, 104);
+            lblTitle.Location = new Point(72, 81);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(42, 15);
             lblTitle.TabIndex = 0;
@@ -48,7 +49,7 @@
             // lblSubtitle
             // 
             lblSubtitle.AutoSize = true;
-            lblSubtitle.Location = new Point(104, 136);
+            lblSubtitle.Location = new Point(72, 113);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(60, 15);
             lblSubtitle.TabIndex = 1;
@@ -57,25 +58,25 @@
             // lblPlayingTime
             // 
             lblPlayingTime.AutoSize = true;
-            lblPlayingTime.Location = new Point(104, 164);
+            lblPlayingTime.Location = new Point(72, 141);
             lblPlayingTime.Name = "lblPlayingTime";
             lblPlayingTime.Size = new Size(85, 15);
             lblPlayingTime.TabIndex = 2;
             lblPlayingTime.Text = "lblPlayingTime";
             // 
-            // lblBestBeginnerTime
+            // lblStatisticsTime
             // 
-            lblBestBeginnerTime.AutoSize = true;
-            lblBestBeginnerTime.Location = new Point(104, 201);
-            lblBestBeginnerTime.Name = "lblBestBeginnerTime";
-            lblBestBeginnerTime.Size = new Size(115, 15);
-            lblBestBeginnerTime.TabIndex = 3;
-            lblBestBeginnerTime.Text = "lblBestBeginnerTime";
+            lblStatisticsTime.AutoSize = true;
+            lblStatisticsTime.Location = new Point(72, 165);
+            lblStatisticsTime.Name = "lblStatisticsTime";
+            lblStatisticsTime.Size = new Size(115, 15);
+            lblStatisticsTime.TabIndex = 3;
+            lblStatisticsTime.Text = "lblBestBeginnerTime";
             // 
             // lblNumberOfClicks
             // 
             lblNumberOfClicks.AutoSize = true;
-            lblNumberOfClicks.Location = new Point(104, 238);
+            lblNumberOfClicks.Location = new Point(72, 193);
             lblNumberOfClicks.Name = "lblNumberOfClicks";
             lblNumberOfClicks.Size = new Size(108, 15);
             lblNumberOfClicks.TabIndex = 4;
@@ -83,7 +84,7 @@
             // 
             // CloseButton
             // 
-            CloseButton.Location = new Point(163, 278);
+            CloseButton.Location = new Point(162, 276);
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(75, 23);
             CloseButton.TabIndex = 5;
@@ -91,13 +92,23 @@
             CloseButton.UseVisualStyleBackColor = true;
             CloseButton.Click += CloseButton_Click;
             // 
+            // lblStatisticsClicks
+            // 
+            lblStatisticsClicks.AutoSize = true;
+            lblStatisticsClicks.Location = new Point(76, 227);
+            lblStatisticsClicks.Name = "lblStatisticsClicks";
+            lblStatisticsClicks.Size = new Size(97, 15);
+            lblStatisticsClicks.TabIndex = 6;
+            lblStatisticsClicks.Text = "lblStatisticsClicks";
+            // 
             // GameWonControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(lblStatisticsClicks);
             Controls.Add(CloseButton);
             Controls.Add(lblNumberOfClicks);
-            Controls.Add(lblBestBeginnerTime);
+            Controls.Add(lblStatisticsTime);
             Controls.Add(lblPlayingTime);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
@@ -112,8 +123,9 @@
         private Label lblTitle;
         private Label lblSubtitle;
         private Label lblPlayingTime;
-        private Label lblBestBeginnerTime;
+        private Label lblStatisticsTime;
         private Label lblNumberOfClicks;
         private Button CloseButton;
+        private Label lblStatisticsClicks;
     }
 }

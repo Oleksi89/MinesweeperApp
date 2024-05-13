@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Main.GameHistory;
 
 namespace Main
 {
@@ -20,12 +21,13 @@ namespace Main
 
         private Board _board;
         private GameTimer gameTimer;
+        public GameTimer GameTimer { get { return gameTimer; } }
         private MineCounter mineCounter;
-        public double BestBeginnerTime = 3;
 
         private bool gameInProgress;
         private string gameResult;
         private IGameHistorySaver _gameHistorySaver;
+        private ISimilarGamesStatistic _statisticCalculator;
         public Board Board { get { return _board; }}
         public bool GameInProgress { get { return gameInProgress; } }
         public bool FirstClickMade = false;
@@ -48,6 +50,7 @@ namespace Main
             LoadSettings();
 
             _gameHistorySaver = new JsonGameHistorySaver();
+            _statisticCalculator = new JsonSimilarGamesStatistic();
         }
 
         private List<IGameSetting> gameSettings = new List<IGameSetting>();
@@ -101,6 +104,11 @@ namespace Main
 
             return historyEntry;
         }
+        public GamesStatistic GetGameStatistics(GameHistoryEntry historyEntry)
+        {
+            return _statisticCalculator.Get(historyEntry, gameHistoryPath);
+        }
+
 
         public void StartGame(string playerName)
         {

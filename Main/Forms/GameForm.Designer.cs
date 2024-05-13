@@ -39,20 +39,21 @@
             playerInfoLabel = new Label();
             openRemainingCellsButton = new Button();
             statisticsButton = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // playerNameTextBox
             // 
-            playerNameTextBox.Location = new Point(350, 115);
+            playerNameTextBox.Location = new Point(832, 66);
             playerNameTextBox.Name = "playerNameTextBox";
             playerNameTextBox.Size = new Size(100, 23);
             playerNameTextBox.TabIndex = 0;
             // 
             // startGameButton
             // 
-            startGameButton.Location = new Point(464, 86);
+            startGameButton.Location = new Point(441, 12);
             startGameButton.Name = "startGameButton";
-            startGameButton.Size = new Size(107, 23);
+            startGameButton.Size = new Size(81, 77);
             startGameButton.TabIndex = 1;
             startGameButton.Text = "startGameButton";
             startGameButton.UseVisualStyleBackColor = true;
@@ -60,7 +61,7 @@
             // 
             // endGameButton
             // 
-            endGameButton.Location = new Point(464, 139);
+            endGameButton.Location = new Point(283, 386);
             endGameButton.Name = "endGameButton";
             endGameButton.Size = new Size(116, 23);
             endGameButton.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             // loginButton
             // 
-            loginButton.Location = new Point(464, 187);
+            loginButton.Location = new Point(283, 434);
             loginButton.Name = "loginButton";
             loginButton.Size = new Size(107, 23);
             loginButton.TabIndex = 3;
@@ -80,7 +81,7 @@
             // 
             // settingsButton
             // 
-            settingsButton.Location = new Point(464, 232);
+            settingsButton.Location = new Point(283, 480);
             settingsButton.Name = "settingsButton";
             settingsButton.Size = new Size(107, 23);
             settingsButton.TabIndex = 4;
@@ -90,7 +91,7 @@
             // 
             // pauseButton
             // 
-            pauseButton.Location = new Point(464, 315);
+            pauseButton.Location = new Point(283, 562);
             pauseButton.Name = "pauseButton";
             pauseButton.Size = new Size(107, 23);
             pauseButton.TabIndex = 5;
@@ -101,25 +102,27 @@
             // mineCounterLabel
             // 
             mineCounterLabel.AutoSize = true;
-            mineCounterLabel.Location = new Point(350, 34);
+            mineCounterLabel.Font = new Font("AniMe Matrix - MB_EN", 20.2499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            mineCounterLabel.Location = new Point(283, 27);
             mineCounterLabel.Name = "mineCounterLabel";
-            mineCounterLabel.Size = new Size(105, 15);
+            mineCounterLabel.Size = new Size(119, 32);
             mineCounterLabel.TabIndex = 6;
-            mineCounterLabel.Text = "mineCounterLabel";
+            mineCounterLabel.Text = "mines";
             // 
             // timerLabel
             // 
             timerLabel.AutoSize = true;
-            timerLabel.Location = new Point(508, 34);
+            timerLabel.Font = new Font("AniMe Matrix - MB_EN", 20.2499981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            timerLabel.Location = new Point(563, 27);
             timerLabel.Name = "timerLabel";
-            timerLabel.Size = new Size(63, 15);
+            timerLabel.Size = new Size(125, 32);
             timerLabel.TabIndex = 7;
-            timerLabel.Text = "timerLabel";
+            timerLabel.Text = "timer";
             // 
             // playerInfoLabel
             // 
             playerInfoLabel.AutoSize = true;
-            playerInfoLabel.Location = new Point(508, 9);
+            playerInfoLabel.Location = new Point(832, 23);
             playerInfoLabel.Name = "playerInfoLabel";
             playerInfoLabel.Size = new Size(88, 15);
             playerInfoLabel.TabIndex = 8;
@@ -127,9 +130,9 @@
             // 
             // openRemainingCellsButton
             // 
-            openRemainingCellsButton.Location = new Point(350, 57);
+            openRemainingCellsButton.Location = new Point(316, 107);
             openRemainingCellsButton.Name = "openRemainingCellsButton";
-            openRemainingCellsButton.Size = new Size(177, 23);
+            openRemainingCellsButton.Size = new Size(186, 70);
             openRemainingCellsButton.TabIndex = 9;
             openRemainingCellsButton.Text = "openRemainingCellsButton";
             openRemainingCellsButton.UseVisualStyleBackColor = true;
@@ -137,7 +140,7 @@
             // 
             // statisticsButton
             // 
-            statisticsButton.Location = new Point(464, 276);
+            statisticsButton.Location = new Point(283, 523);
             statisticsButton.Name = "statisticsButton";
             statisticsButton.Size = new Size(107, 23);
             statisticsButton.TabIndex = 10;
@@ -145,11 +148,21 @@
             statisticsButton.UseVisualStyleBackColor = true;
             statisticsButton.Click += statisticsButton_Click;
             // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top;
+            panel1.AutoSize = true;
+            panel1.Location = new Point(421, 201);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(485, 310);
+            panel1.TabIndex = 11;
+            // 
             // GameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1009, 643);
+            Controls.Add(panel1);
             Controls.Add(statisticsButton);
             Controls.Add(openRemainingCellsButton);
             Controls.Add(playerInfoLabel);
@@ -181,5 +194,6 @@
         private Label playerInfoLabel;
         private Button openRemainingCellsButton;
         private Button statisticsButton;
+        private Panel panel1;
     }
 }

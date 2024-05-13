@@ -47,7 +47,9 @@ namespace Main
             if (message == "game won")
             {
 
-                gameWonControl.UpdateGameWonInfo(/*gameTimer.TimeElapsed*/ 2, game.BestBeginnerTime, game.ClicksMade);
+                var gameData = game.GetGameData();
+                var statistics = game.GetGameStatistics(gameData);
+                gameWonControl.UpdateGameWonInfo(gameData, statistics);
                 gameWonControl.Visible = true;
                 gameWonControl.BringToFront();
             }
