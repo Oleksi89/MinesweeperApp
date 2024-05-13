@@ -21,22 +21,22 @@ namespace Main
     {
         private Game game;
         private BoardControl boardControl;
-       
-        
+
+
         private GameWonControl gameWonControl;
 
 
         public GameForm()
         {
             InitializeComponent();
-            
+
             game = Game.Instance;
-            game.Initialize(timerLabel,mineCounterLabel);
-            
+            game.Initialize(timerLabel, mineCounterLabel);
+
             game.RegisterObserver(this);
-            
+
             gameWonControl = new GameWonControl();
-            
+
             this.Controls.Add(gameWonControl);
             gameWonControl.Dock = DockStyle.Fill;
             gameWonControl.Visible = false;
@@ -74,7 +74,7 @@ namespace Main
 
         }
 
-    private void startGameButton_Click(object sender, EventArgs e)
+        private void startGameButton_Click(object sender, EventArgs e)
         {
             string playerName = playerNameTextBox.Text;
             game.StartGame(playerName);
@@ -116,6 +116,11 @@ namespace Main
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             game.SaveSettings();
+        }
+
+        private void statisticsButton_Click(object sender, EventArgs e)
+        {
+            new StatisticsForm(game).ShowDialog();
         }
     }
 
