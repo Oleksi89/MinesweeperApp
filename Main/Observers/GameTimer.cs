@@ -26,7 +26,7 @@ namespace Main
         private void Timer_Tick(object sender, EventArgs e)
         {
             TimeElapsed += timer.Interval / 1000.0;
-            timerLabel.Text = Math.Round(TimeElapsed, 0).ToString();
+            timerLabel.Text = Math.Round(TimeElapsed, 0).ToString().PadLeft(3, '0');
 
         }
 

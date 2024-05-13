@@ -110,7 +110,7 @@ namespace Main
         }
 
 
-        public void StartGame(string playerName)
+        public void StartGame()
         {
             ClicksMade = 0;
             gameResult = "none";

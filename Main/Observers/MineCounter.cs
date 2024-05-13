@@ -24,13 +24,13 @@ namespace Main
             if (Game.Instance.GameInProgress == false && Game.Instance.Board != null)
             {
                 int totalMines = Game.Instance.Board.TotalMines;
-                mineCounterLabel.Text = totalMines.ToString();
+                mineCounterLabel.Text = totalMines.ToString().PadLeft(3, '0');
             }
             else if (Game.Instance.GameInProgress == true && Game.Instance.Board != null)
             {
                 int flaggedCells = Game.Instance.Board.GetCells().Count(c => c.IsFlagged);
                 int totalMines = Game.Instance.Board.TotalMines;
-                mineCounterLabel.Text = (totalMines - flaggedCells).ToString();
+                mineCounterLabel.Text = (totalMines - flaggedCells).ToString().PadLeft(3, '0');
             }
             else
             {

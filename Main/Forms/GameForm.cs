@@ -78,8 +78,7 @@ namespace Main
 
         private void startGameButton_Click(object sender, EventArgs e)
         {
-            string playerName = playerNameTextBox.Text;
-            game.StartGame(playerName);
+            game.StartGame();
         }
 
         private void endGameButton_Click(object sender, EventArgs e)
@@ -128,6 +127,13 @@ namespace Main
         private void BoardPanel_Resize(object sender, EventArgs e)
         {
             BoardPanel.Left = (this.ClientSize.Width - BoardPanel.Width) / 2;
+        }
+
+        private void mineCounterLabel_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(mineCounterLabel.Text, out int number) && number == 0)
+                mineCounterLabel.ForeColor = Color.Cyan;
+            else mineCounterLabel.ForeColor = Color.Black;
         }
     }
 
