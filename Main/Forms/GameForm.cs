@@ -81,15 +81,8 @@ namespace Main
             game.StartGame();
         }
 
-        private void endGameButton_Click(object sender, EventArgs e)
-        {
-            game.EndGame();
-        }
 
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            new LoginForm(game).ShowDialog();
-        }
+
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
