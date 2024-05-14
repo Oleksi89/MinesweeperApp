@@ -34,7 +34,6 @@
         public void GenerateBoard(IDifficultyLevelStrategy difficultyLevelStrategy)
         {
             DifficultyLevel difficultyLevel = difficultyLevelStrategy.GetDifficultyLevel();
-            CellFactory cellFactory = new CellFactory();
             InitializeCells();
             PlaceMines(difficultyLevel);
             InsertNumberCells();
@@ -43,8 +42,7 @@
 
         public void ReGenerateBoard(IDifficultyLevelStrategy difficultyLevelStrategy, int safeX, int safeY)
         {
-            DifficultyLevel difficultyLevel = difficultyLevelStrategy.GetDifficultyLevel();
-            CellFactory cellFactory = new CellFactory();
+            DifficultyLevel difficultyLevel = difficultyLevelStrategy.GetDifficultyLevel();;
             InitializeCells();
             PlaceMines(difficultyLevel, safeX, safeY);
             InsertNumberCells();
@@ -53,20 +51,18 @@
 
         public void InitializeCells()
         {
-            CellFactory cellFactory = new CellFactory();
 
             // Initialize all cells as EmptyCell
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    cells[i, j] = cellFactory.CreateCell("Empty", i, j);
+                    cells[i, j] = CellFactory.CreateCell("Empty", i, j);
                 }
             }
         }
         public void PlaceMines(DifficultyLevel difficultyLevel)
         {
-            CellFactory cellFactory = new CellFactory();
 
             Random rand = new Random();
             for (int i = 0; i < difficultyLevel.Mines; i++)
@@ -78,13 +74,12 @@
                     y = rand.Next(Height);
                 } while (cells[x, y] is MineCell);
 
-                cells[x, y] = cellFactory.CreateCell("Mine", x, y);
+                cells[x, y] = CellFactory.CreateCell("Mine", x, y);
             }
         }
 
         public void PlaceMines(DifficultyLevel difficultyLevel, int safeX, int safeY)
         {
-            CellFactory cellFactory = new CellFactory();
 
             Random rand = new Random();
             for (int i = 0; i < difficultyLevel.Mines; i++)
@@ -96,7 +91,7 @@
                     y = rand.Next(Height);
                 } while (cells[x, y] is MineCell || IsAdjacent(x, y, safeX, safeY));
 
-                cells[x, y] = cellFactory.CreateCell("Mine", x, y);
+                cells[x, y] = CellFactory.CreateCell("Mine", x, y);
             }
         }
 
@@ -186,7 +181,7 @@
                         int adjacentMines = CountAdjacentMines(i, j);
                         if (adjacentMines > 0)
                         {
-                            cells[i, j] = new NumberCell(i, j, adjacentMines);
+                            cells[i, j] = CellFactory.CreateCell("Number",i, j, adjacentMines);
                         }
                     }
                 }
