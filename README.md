@@ -1,4 +1,4 @@
-# Minesweeper
+# MinesweeperApp
 
 ### The classic functionality of the "Minesweeper" game has been implemented and some functionality has been added.
 
@@ -13,7 +13,8 @@
 ## Launching the program
 
 To launch the program, you only need to compile the project.
-After compiling the project, to ensure the game statistics are not empty, you can move the [gamesHistory.dat]() file to the directory with the executable file of the project.
+
+After compiling the project, to ensure the game statistics are not empty, you can move the [gamesHistory.dat](./GamesHistoryData/gamesHistory.dat) file to the directory with the executable file of the project.
 
 
 ## Program Functionality
@@ -25,6 +26,8 @@ When launching the program, a board is immediately generated with saved settings
 The Pause menu button, the "Game Preparation" button (yellow smiley) and inscriptions that correspond to the count of unmarked mines and the game timer are available.
 
 To start the game, you need to press LMB on any cell.
+
+When App  is closing it saves current game settings. 
 
 When clicking on the Pause menu button, the game timer will pause (if the game has started), the cells will become unavailable for clicks and the Pause Menu will appear.
 
@@ -74,26 +77,32 @@ In **Rules and tips**, you can view useful tips and explanations of game setting
 
 ### Singleton
 
-Used to create only one game object: [Game](=heads#L16)
+Used to create only one game object: [Game](./Main/GameLogic/Game.cs#L10)
 
 ### Observer
 
-Used to notify the UI of game changes (game preparation, win, loss, pause, resume) [IObserver](?ref_type=heads#L126)
+Used to notify the UI of game changes (game preparation, win, loss, pause, resume) [Observer](./Main/GameLogic/Observers)
 
 ### Factory Method
 
-[CellFactory](?ref_type=heads) - This is a factory class that has a static createCell method. This method accepts the cell type (type) and its coordinates.
+[CellFactory](./Main/GameLogic/Cells/CellFactory.cs) - This is a factory class that has a static createCell method. This method accepts the cell type and its coordinates.
+
 Based on the transferred cell type, it creates the corresponding object.
+
 Depending on the type of game, it creates an EmptyCell, MineCell, or NumberCell class object.
 
 
 ### Strategy
 
-The "strategy" pattern is used in the logic of substituting the parameters of the board generation depending on the chosen difficulty of the game.
+The "strategy" pattern is used in the logic of substituting the parameters of the board generation depending on the chosen difficulty of the game. [DifficultyLevelStrategy](./Main/GameLogic/DifficultyLevelStrategy)
 
 ### Lightweight
 
-The "lightweight" pattern allows to save memory when changing the [CellControl](?ref_type=heads#L126) display. The [CellAppearanceFactory](?ref_type=heads#L126) class stores already created [CellAppearance](?ref_type=heads#L126) objects in the _appearances dictionary and reuses them when an object of the same type needs to be created. So, when changing the display of a CellControl with the same CellAppearance types, a new image will not be initialized, but the same CellAppearance object will be used.
+The "lightweight" pattern allows to save memory when changing the [CellControl](./Main/Controls/CellControl.cs) display. 
+
+The [CellAppearanceFactory](./Main/CellAppearance/CellAppearanceFactory.cs) class stores already created [CellAppearance](./Main/CellAppearance/CellAppearance.cs) objects in the _appearances dictionary and reuses them when an object of the same type needs to be created.
+
+ So, when changing the display of a CellControl with the same CellAppearance types, a new image will not be initialized, but the same CellAppearance object will be used.
 
 
 ## Refactoring Techniques
@@ -137,7 +146,7 @@ Each class do not contains unnecessary methods for child classes.
 
 ### Dependency Inversion Principle
 
-The Game class [depends](#L59) on the [IGameHistorySaver](#L2) abstraction, not on the concrete [JsonGameHistorySaver](#L2) class.
+The Game class [depends](./Main/GameLogic/Game.cs#L19) on the [IGameHistorySaver](./Main/GameHistory/IGameHistorySaver.cs) abstraction, not on the concrete [JsonGameHistorySaver](./Main/GameHistory/JsonGameHistorySaver.cs) class.
 
 ### KISS
 
