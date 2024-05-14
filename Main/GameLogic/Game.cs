@@ -79,15 +79,15 @@ namespace Main
         {
             var historyEntry = new GameHistoryEntry
             {
-                DifficultyLevel = this.Settings.DifficultyLevel,
-                FirstClickIsSafe = this.Settings.FirstClickIsSafe,
-                ClickNumberOpensAdjacentCells = this.Settings.ClickNumberOpensAdjacentCells,
-                ClickOnMineStartsDefuseCountdown = this.Settings.ClickOnMineDefuses,
-                AllMinesFlaggedOpensRemainingCells = this.Settings.AllMinesFlaggedOpensRemainingCells,
+                DifficultyLevel = Settings.DifficultyLevel,
+                FirstClickIsSafe = Settings.FirstClickIsSafe,
+                ClickNumberOpensAdjacentCells = Settings.ClickNumberOpensAdjacentCells,
+                ClickOnMineStartsDefuseCountdown = Settings.ClickOnMineDefuses,
+                AllMinesFlaggedOpensRemainingCells = Settings.AllMinesFlaggedOpensRemainingCells,
                 PercentageOfCorrectlyOpenedCells = (double)Board.GetCorrectlyOpenedCellsPercentage(),
                 EndTime = DateTime.Now,
-                Result = this.gameResult,
-                ClicksMade = this.ClicksMade,
+                Result = gameResult,
+                ClicksMade = ClicksMade,
                 GameTime = gameTimer.TimeElapsed
             };
 

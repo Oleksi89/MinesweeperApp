@@ -31,7 +31,6 @@ namespace Main
         }
         public void UpdateBoard()
         {
-            // Оновлюємо клітинки відповідно до нового стану дошки
             for (int y = 0; y < board.Height; y++)
             {
                 for (int x = 0; x < board.Width; x++)

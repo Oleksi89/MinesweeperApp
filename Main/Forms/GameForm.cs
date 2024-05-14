@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Main.Controls;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Main;
-using System.Text.Json;
-using Main.Controls;
 
 namespace Main
 {

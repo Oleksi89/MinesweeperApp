@@ -4,19 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Main.GameHistory
+namespace Main
 {
-    public class GamesStatistic
-    {
-        public double BestTime { get; set; }
-        public double AverageTime { get; set; }
-        public int LeastClicks { get; set; }
-        public double AverageClicks { get; set; }
-    }
-    public interface ISimilarGamesStatistic
-    {
-        GamesStatistic Get(GameHistoryEntry historyEntry, string filePath);
-    }
     public class JsonSimilarGamesStatistic : ISimilarGamesStatistic
     {
         public GamesStatistic Get(GameHistoryEntry historyEntry, string filePath)

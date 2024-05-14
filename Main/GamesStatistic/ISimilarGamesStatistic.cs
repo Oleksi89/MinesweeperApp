@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Main
 {
-    public interface IGameObserver
+    public interface ISimilarGamesStatistic
     {
-        void Update(string message);
+        GamesStatistic Get(GameHistoryEntry historyEntry, string filePath);
     }
-
-
-
-
 }
