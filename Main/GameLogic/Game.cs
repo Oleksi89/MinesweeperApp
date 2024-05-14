@@ -173,53 +173,12 @@ namespace Main
 
         public void SaveSettings()
         {
-
-            string jsonString = JsonSerializer.Serialize(Settings);
-            File.WriteAllText(settingsPath, jsonString);
+            Settings.Save(settingsPath);
         }
 
         public void LoadSettings()
         {
-            if (File.Exists(settingsPath))
-            {
-                string jsonString = File.ReadAllText(settingsPath);
-                GameSettings settings = JsonSerializer.Deserialize<GameSettings>(jsonString);
-
-                switch (settings.DifficultyLevel)
-                {
-                    case "Easy":
-                        settings.DifficultyLevelStrategy = new EasyDifficultyLevelStrategy();
-                        break;
-                    case "Medium":
-                        settings.DifficultyLevelStrategy = new MediumDifficultyLevelStrategy();
-                        break;
-                    case "Hard":
-                        settings.DifficultyLevelStrategy = new HardDifficultyLevelStrategy();
-                        break;
-                }
-
-                if (settings.FirstClickIsSafe)
-                {
-                    AddGameSetting(new SafeStart());
-                }
-
-                if (settings.ClickNumberOpensAdjacentCells)
-                {
-                    AddGameSetting(new SafeZone());
-                }
-
-                if (settings.ClickOnMineDefuses)
-                {
-                    AddGameSetting(new Defuse());
-                }
-
-                if (settings.AllMinesFlaggedOpensRemainingCells)
-                {
-                    AddGameSetting(new OpenRemaining());
-                }
-
-                Settings = settings;
-            }
+            Settings.Load(settingsPath, this);
         }
 
         public void IsGameWon()
